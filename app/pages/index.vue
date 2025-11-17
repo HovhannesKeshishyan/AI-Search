@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import { refDebounced } from "@vueuse/core"
 import InputText from "primevue/inputtext";
 import Checkbox from "primevue/checkbox";
 
 const search = ref("");
+const debouncedSearch = refDebounced(search, 200);
 const enableSemanticSearch = ref(false);
 
-const {data} = await useFetch(() =>`/api/products?search=${search.value}`);
+const {data} = await useFetch(() =>`/api/products?search=${debouncedSearch.value}`);
 </script>
 
 <template>
