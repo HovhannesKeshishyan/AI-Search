@@ -1,0 +1,37 @@
+{
+  "name": "ai-embedding-search",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "@nuxt/eslint": "^1.10.0",
+    "@nuxt/icon": "^2.1.0",
+    "@nuxt/image": "^2.0.0",
+    "@primeuix/themes": "^1.2.5",
+    "bcrypt": "^5.1.1",
+    "eslint": "^9.39.1",
+    "izitoast": "^1.4.0",
+    "jsonwebtoken": "^9.0.2",
+    "nuxt": "^4.2.1",
+    "nuxt-toast": "^1.4.0",
+    "primevue": "^4.4.1",
+    "redis": "^5.9.0",
+    "vue": "^3.5.24",
+    "vue-router": "^4.6.3",
+    "vue3-toastify": "^0.2.8",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@primevue/nuxt-module": "^4.4.1",
+    "@types/jsonwebtoken": "^9.0.10",
+    "sass": "^1.94.0"
+  }
+}
