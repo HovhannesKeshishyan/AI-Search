@@ -27,7 +27,9 @@ async function handleLogout() {
       <Button severity="danger" label="Logout" @click="handleLogout"/>
     </div>
     <div v-else>
-      <NuxtLink to="/login" class="login-link">Login</NuxtLink>
+      <NuxtLink to="/login">
+         <Button label="Login"/>
+      </NuxtLink>
     </div>
   </nav>
 </header>
@@ -49,11 +51,6 @@ header {
 
 .logo img {
   height: 50px;
-}
-
-.login-link {
-  font-size: 18px;
-  color: white;
 }
 
 .admin-section {
