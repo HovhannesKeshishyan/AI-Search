@@ -49,7 +49,7 @@ async function handleLogin() {
             type="text"
             autocomplete="username"
             required
-          />
+          >
         </div>
 
         <div class="field">
@@ -60,7 +60,7 @@ async function handleLogin() {
             type="password"
             autocomplete="current-password"
             required
-          />
+          >
         </div>
 
         <button class="btn" type="submit">Log in</button>

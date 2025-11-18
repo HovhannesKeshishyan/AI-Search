@@ -20,7 +20,7 @@ const { data } = await useFetch(
     <section class="search-section">
       <div class="search-input-wrapper">
         <label for="search">Search</label>
-        <InputText id="search" type="search" v-model="search" placeholder="Search" />
+        <InputText id="search" v-model="search" type="search" placeholder="Search" />
       </div>
 
       <div class="semantic-search-wrapper">
