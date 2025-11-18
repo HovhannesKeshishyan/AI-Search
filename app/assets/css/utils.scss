@@ -1,0 +1,10 @@
+@use "sass:math";
+
+@function pxToRem($value, $base-font-size: 16px) {
+  @if (math.unit($value) == "px") {
+    @return math.div($value, $base-font-size) * 1rem;
+  } @else {
+    @warn "Value must be in pixels (px). Got #{$value}.";
+    @return $value;
+  }
+}

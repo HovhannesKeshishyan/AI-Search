@@ -11,7 +11,7 @@ export default defineNuxtConfig({
   ],
   css: ["~/assets/css/global.css"],
   image: {
-    domains: ["https://images.unsplash.com"]
+    domains: ["https://images.unsplash.com"],
   },
   runtimeConfig: {
     jwtAccessSecret: process.env.JWT_ACCESS_SECRET,
@@ -25,5 +25,17 @@ export default defineNuxtConfig({
         preset: Aura,
       },
     },
-  }
+  },
+
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `
+            @use "~/assets/css/utils.scss" as *;
+          `,
+        },
+      },
+    },
+  },
 });
