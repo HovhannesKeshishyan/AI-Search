@@ -73,9 +73,9 @@ const deleteProduct = async () => {
 .product-page {
   display: flex;
   background-color: white;
-  gap: 16px;
-  padding: 16px;
-  border-radius: 20px;
+  gap: pxToRem(16px);
+  padding: pxToRem(16px);
+  border-radius: pxToRem(20px);
 }
 
 .image-wrapper {
@@ -106,7 +106,7 @@ const deleteProduct = async () => {
 .buttons-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: pxToRem(20px);
 }
 
 .edit-button {
@@ -115,9 +115,9 @@ const deleteProduct = async () => {
   align-items: center;
   justify-content: center;
   background-color: #31ef80;
-  padding: 15px 20px;
-  border-radius: 20px;
-  font-size: 20px;
+  padding: pxToRem(15px) pxToRem(20px);
+  border-radius: pxToRem(20px);
+  font-size: pxToRem(20px);
   color: #000;
   transition: background-color 0.2s ease-in-out;
   text-decoration: none;

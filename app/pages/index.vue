@@ -37,8 +37,12 @@ const {data} = await useFetch(() =>`/api/products?search=${debouncedSearch.value
 .search-section {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 12px;
+  gap: pxToRem(12px);
+  padding: pxToRem(12px);
+
+  label {
+    font-size: pxToRem(20px);
+  }
 
   input#search {
     width: 100%;
@@ -47,13 +51,13 @@ const {data} = await useFetch(() =>`/api/products?search=${debouncedSearch.value
   .search-input-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: pxToRem(4px);
   }
 
   .semantic-search-wrapper {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: pxToRem(6px);
   }
 }
 </style>

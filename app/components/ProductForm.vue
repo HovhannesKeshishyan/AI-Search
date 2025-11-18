@@ -129,12 +129,12 @@ const onFormSubmit = async (e: FormSubmitEvent<Record<string, string>>) => {
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 40px;
+  gap: pxToRem(40px);
 }
 
 .form-input {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: pxToRem(10px);
 }
 </style>

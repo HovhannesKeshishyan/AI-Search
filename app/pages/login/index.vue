@@ -83,47 +83,47 @@ async function handleLogin() {
   min-height: 100vh;
   background: #f5f6fa;
   color: #000;
-  padding: 20px;
+  padding: pxToRem(20px);
 }
 
 .login-card {
   width: 100%;
-  max-width: 380px;
+  max-width: pxToRem(380px);
   background: #fff;
-  padding: 32px;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  padding: pxToRem(32px);
+  border-radius: pxToRem(12px);
+  box-shadow: 0 pxToRem(6px) pxToRem(18px) rgba(0,0,0,0.08);
 }
 
 .title {
-  margin-bottom: 24px;
+  margin-bottom: pxToRem(24px);
   text-align: center;
   font-weight: 600;
-  font-size: 24px;
+  font-size: pxToRem(24px);
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: pxToRem(16px);
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: pxToRem(6px);
 }
 
 label {
-  font-size: 14px;
+  font-size: pxToRem(16px);
   font-weight: 500;
 }
 
 input {
-  padding: 10px 12px;
-  border-radius: 8px;
+  padding: pxToRem(10px) pxToRem(12px);
+  border-radius: pxToRem(8px);
   border: 1px solid #ccc;
-  font-size: 14px;
+  font-size: pxToRem(16px);
   transition: border-color 0.25s;
 }
 
@@ -133,15 +133,15 @@ input:focus {
 }
 
 .btn {
-  margin-top: 8px;
-  padding: 10px;
+  margin-top: pxToRem(8px);
+  padding: pxToRem(10px);
   background: #3b82f6;
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 15px;
+  border-radius: pxToRem(8px);
+  font-size: pxToRem(15px);
   cursor: pointer;
-  transition: background 0.25s;
+  transition: background-color 0.25s;
 }
 
 .btn:hover {
@@ -150,14 +150,14 @@ input:focus {
 
 .error {
   color: #e11d48;
-  font-size: 14px;
-  margin-top: 6px;
+  font-size: pxToRem(14px);
+  margin-top: pxToRem(6px);
 }
 
 .hint {
-  margin-top: 16px;
+  margin-top: pxToRem(16px);
   text-align: center;
-  font-size: 13px;
+  font-size: pxToRem(14px);
   color: #777;
 }
 </style>

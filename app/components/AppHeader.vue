@@ -37,25 +37,25 @@ async function handleLogout() {
 
 <style scoped lang="scss">
 header {
-  padding: 20px;
+  padding: pxToRem(20px);
   border-bottom: 1px solid #ccc;
 
   nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: pxToRem(20px);
     justify-content: space-between;
     align-items: center;
   }
 }
 
 .logo img {
-  height: 50px;
+  height: pxToRem(50px);
 }
 
 .admin-section {
   display: flex;
-  gap: 10px;
+  gap: pxToRem(10px);
   align-items: center;
 }
 </style>
