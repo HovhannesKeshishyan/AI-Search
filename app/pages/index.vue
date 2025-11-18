@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { refDebounced } from "@vueuse/core"
+import { refDebounced } from "@vueuse/core";
 import InputText from "primevue/inputtext";
 import Checkbox from "primevue/checkbox";
 
@@ -7,30 +7,36 @@ const search = ref("");
 const debouncedSearch = refDebounced(search, 200);
 const enableSemanticSearch = ref(false);
 
-const {data} = await useFetch(() =>`/api/products?search=${debouncedSearch.value}`);
+const { data } = await useFetch(
+  () =>
+    `/api/products?search=${debouncedSearch.value}&enableSemanticSearch=${enableSemanticSearch.value}`
+);
 </script>
 
 <template>
-<div>
-  <h1>Browse Products</h1>
+  <div>
+    <h1>Browse Products</h1>
 
-  <section class="search-section">
+    <section class="search-section">
+      <div class="search-input-wrapper">
+        <label for="search">Search</label>
+        <InputText id="search" type="search" v-model="search" placeholder="Search" />
+      </div>
 
-    <div class="search-input-wrapper">
-      <label for="search">Search</label>
-      <InputText id="search" v-model="search" placeholder="Search" />
-    </div>
+      <div class="semantic-search-wrapper">
+        <label for="semantic">Enable Semantic Search</label>
+        <Checkbox
+          v-model="enableSemanticSearch"
+          input-id="semantic"
+          :binary="true"
+        />
+      </div>
+    </section>
 
-    <div class="semantic-search-wrapper">
-      <label for="semantic">Enable Semantic Search</label>
-      <Checkbox v-model="enableSemanticSearch" input-id="semantic" :binary="true" />
-    </div>
-  </section>
-
-  <section>
-    <ProductsList :products="data?.products || []"/>
-  </section>
-</div>
+    <section>
+      <ProductsList :products="data?.products || []" />
+    </section>
+  </div>
 </template>
 
 <style scoped lang="scss">
