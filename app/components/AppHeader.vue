@@ -13,7 +13,7 @@ async function handleLogout() {
   <nav>
     <div class="logo">
       <NuxtLink to="/">
-        <NuxtImg src="/logo-new.png"/>
+        <NuxtImg src="/logo.png"/>
       </NuxtLink>
     </div>
     <div v-if="user" class="admin-section">
