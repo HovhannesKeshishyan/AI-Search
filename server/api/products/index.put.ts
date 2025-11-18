@@ -3,7 +3,7 @@ export default defineEventHandler(async (event) => {
     id: string;
     product: ProductFormState;
   }>(event);
-  
+
   const products = await getProductsFromDB(event);
 
   const productIndex = products.findIndex((p) => p.id === id);
@@ -15,18 +15,20 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-
-  
+  const isTitleChanged = editedProduct.title !== products[productIndex].title;
+  const embeddings = isTitleChanged
+    ? await generateEmbedding(editedProduct.title)
+    : products[productIndex].embeddings;
   const updatedProduct: Product = {
     ...editedProduct,
     id, // id comes as seperate key, to not include in validation
-    embeddings: products[productIndex].embeddings // not ovveride embeddings
-  }
+    embeddings: embeddings,
+  };
 
   // maybe can skip this
   products[productIndex] = updatedProduct;
 
   await addProductsToDB(event, products);
 
-  return products[productIndex];
+  return getProductDTO(products[productIndex]);
 });

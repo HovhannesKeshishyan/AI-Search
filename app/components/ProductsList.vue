@@ -9,6 +9,7 @@ defineProps<{ products: Product[] }>();
       :key="product.id"
       :to="`/product/${product.id}`"
       class="product-card"
+      :data-has-embeddings="!!product.embeddings?.length"
     >
       <Card>
         <template #header>

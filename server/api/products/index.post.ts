@@ -7,12 +7,12 @@ export default defineEventHandler(async (event) => {
   const finalProduct = {
     ...product,
     id: crypto.randomUUID(),
-    embeddings: [] //todo
+    embeddings: await generateEmbedding(product.title),
   }
 
   products.push(finalProduct);
 
   await addProductsToDB(event, products);
 
-  return finalProduct;
+  return getProductDTO(finalProduct);
 });
