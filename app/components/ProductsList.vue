@@ -25,17 +25,15 @@ defineProps<{ products: Product[] }>();
         </template>
 
         <template #title>
-          {{ product.title }}
+          <h2 class="product-title">{{ product.title }}</h2>
         </template>
 
         <template #content>
-          <p>{{ product.description }}</p>
+          <h3 class="product-description">{{ product.description }}</h3>
         </template>
 
         <template #footer>
-          <div style="font-size: 18px; font-weight: bold">
-            ${{ product.price }}
-          </div>
+          <div class="product-price">${{ Number(product.price).toFixed(2) }}</div>
         </template>
       </Card>
     </NuxtLink>
@@ -50,11 +48,17 @@ defineProps<{ products: Product[] }>();
   padding: pxToRem(16px);
 }
 
+.products-list a {
+  text-decoration: none;
+}
+
 .product-card {
   width: 100%;
 }
 
 .image-wrapper {
+  border-radius: pxToRem(10px) pxToRem(10px) 0 0;
+  overflow: hidden;
   height: pxToRem(200px);
   position: relative;
 
@@ -63,5 +67,18 @@ defineProps<{ products: Product[] }>();
     height: 100%;
     object-fit: cover;
   }
+}
+
+.product-title {
+  font-size: pxToRem(34px);
+}
+
+.product-description {
+  font-size: pxToRem(20px);
+}
+
+.product-price {
+  font-size: pxToRem(24px);
+  color: darkcyan;
 }
 </style>

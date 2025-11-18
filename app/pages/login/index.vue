@@ -50,7 +50,7 @@ async function handleLogin() {
             type="email"
             autocomplete="username"
             required
-          >
+          />
         </div>
 
         <div class="field">
@@ -61,7 +61,7 @@ async function handleLogin() {
             type="password"
             autocomplete="current-password"
             required
-          >
+          />
         </div>
 
         <button class="btn" type="submit">Log in</button>
@@ -69,13 +69,14 @@ async function handleLogin() {
         <p v-if="errorMsg" class="error">{{ errorMsg }}</p>
       </form>
 
-      <p class="hint">Hint: admin@example.com (admin) or user@example.com (user)</p>
+      <p class="hint">
+        Hint: admin@example.com (admin) or user@example.com (user)
+      </p>
     </div>
   </div>
 </template>
 
-
-<style scoped>
+<style scoped lang="scss">
 .login-container {
   display: flex;
   justify-content: center;
@@ -92,7 +93,7 @@ async function handleLogin() {
   background: #fff;
   padding: pxToRem(32px);
   border-radius: pxToRem(12px);
-  box-shadow: 0 pxToRem(6px) pxToRem(18px) rgba(0,0,0,0.08);
+  box-shadow: 0 pxToRem(6px) pxToRem(18px) rgba(0, 0, 0, 0.08);
 }
 
 .title {
