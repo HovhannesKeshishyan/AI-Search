@@ -4,7 +4,7 @@ definePageMeta({
 });
 
 const user = useAuthUser();
-const email = ref("");
+const username = ref("");
 const password = ref("");
 const errorMsg = ref<string | null>(null);
 
@@ -14,7 +14,7 @@ async function handleLogin() {
     const userData = await $fetch("/api/auth/login", {
       method: "POST",
       body: {
-        email: email.value,
+        username: username.value,
         password: password.value,
       },
     });
@@ -31,7 +31,6 @@ async function handleLogin() {
     } else {
       errorMsg.value = "An error occurred.";
     }
-    errorMsg.value = "An error occurred.";
   }
 }
 </script>
@@ -43,11 +42,11 @@ async function handleLogin() {
 
       <form class="form" @submit.prevent="handleLogin">
         <div class="field">
-          <label for="email">Email</label>
+          <label for="username">Username</label>
           <input
-            id="email"
-            v-model="email"
-            type="email"
+            id="username"
+            v-model="username"
+            type="text"
             autocomplete="username"
             required
           />
