@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Message from "primevue/message";
 import { refDebounced } from "@vueuse/core";
 import InputText from "primevue/inputtext";
 import Checkbox from "primevue/checkbox";
@@ -11,32 +12,29 @@ const { data } = await useFetch(
   () =>
     `/api/products?search=${debouncedSearch.value}&enableSemanticSearch=${enableSemanticSearch.value}`
 );
+
+const isEmpty = computed(() => !data.value?.products.length);
 </script>
 
 <template>
-  <div>
-    <h1>Browse Products</h1>
+<div>
+  <section class="search-section">
+    <div class="search-input-wrapper">
+      <label for="search">Search</label>
+      <InputText id="search" v-model="search" :disabled="isEmpty" type="search" placeholder="Search" />
+    </div>
 
-    <section class="search-section">
-      <div class="search-input-wrapper">
-        <label for="search">Search</label>
-        <InputText id="search" v-model="search" type="search" placeholder="Search" />
-      </div>
+    <div class="semantic-search-wrapper">
+      <label for="semantic">Enable Semantic Search</label>
+      <Checkbox v-model="enableSemanticSearch" :disabled="isEmpty" input-id="semantic" :binary="true" />
+    </div>
+  </section>
 
-      <div class="semantic-search-wrapper">
-        <label for="semantic">Enable Semantic Search</label>
-        <Checkbox
-          v-model="enableSemanticSearch"
-          input-id="semantic"
-          :binary="true"
-        />
-      </div>
-    </section>
-
-    <section>
-      <ProductsList :products="data?.products || []" />
-    </section>
-  </div>
+  <section class="products-section">
+    <Message v-if="isEmpty" severity="warn">Warn Message</Message>
+    <ProductsList v-else :products="data?.products || []" />
+  </section>
+</div>
 </template>
 
 <style scoped lang="scss">
@@ -44,7 +42,7 @@ const { data } = await useFetch(
   display: flex;
   flex-direction: column;
   gap: pxToRem(12px);
-  padding: pxToRem(12px);
+  margin-top: pxToRem(20px);
 
   label {
     font-size: pxToRem(20px);
@@ -65,5 +63,9 @@ const { data } = await useFetch(
     align-items: center;
     gap: pxToRem(6px);
   }
+}
+
+.products-section {
+  margin-top: pxToRem(20px);
 }
 </style>

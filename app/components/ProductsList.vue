@@ -3,42 +3,30 @@ defineProps<{ products: Product[] }>();
 </script>
 
 <template>
-  <div class="products-list">
-    <NuxtLink
-      v-for="product in products"
-      :key="product.id"
-      :to="`/product/${product.id}`"
-      class="product-card"
-      :data-has-embeddings="!!product.embeddings?.length"
-    >
-      <Card>
-        <template #header>
-          <div class="image-wrapper">
-            <NuxtImg
-              :src="product.image"
-              width="300"
-              height="200"
-              quality="80"
-              fit="cover"
-              :alt="product.title"
-            />
-          </div>
-        </template>
+<div class="products-list">
+  <NuxtLink v-for="product in products" :key="product.id" :to="`/product/${product.id}`" class="product-card"
+    :data-has-embeddings="!!product.embeddings?.length">
+    <Card>
+      <template #header>
+        <div class="image-wrapper">
+          <NuxtImg :src="product.image" width="300" height="200" quality="80" fit="cover" :alt="product.title" />
+        </div>
+      </template>
 
-        <template #title>
-          <h2 class="product-title">{{ product.title }}</h2>
-        </template>
+      <template #title>
+        <h2 class="product-title">{{ product.title }}</h2>
+      </template>
 
-        <template #content>
-          <h3 class="product-description">{{ product.description }}</h3>
-        </template>
+      <template #content>
+        <h3 class="product-description">{{ product.description }}</h3>
+      </template>
 
-        <template #footer>
-          <div class="product-price">${{ Number(product.price).toFixed(2) }}</div>
-        </template>
-      </Card>
-    </NuxtLink>
-  </div>
+      <template #footer>
+        <div class="product-price">${{ Number(product.price).toFixed(2) }}</div>
+      </template>
+    </Card>
+  </NuxtLink>
+</div>
 </template>
 
 <style lang="scss" scoped>
@@ -46,7 +34,7 @@ defineProps<{ products: Product[] }>();
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: pxToRem(16px);
-  padding: pxToRem(16px);
+  padding: pxToRem(20px) 0;
 }
 
 .products-list a {

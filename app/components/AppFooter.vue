@@ -30,21 +30,21 @@ const socialLinks: SocialMedia[] = [
 </script>
 
 <template>
-  <footer class="footer">
-    <div class="footer-row footer-row-1">
-      <h3>Contacts</h3>
-      <ul class="social-media">
-        <li v-for="item in socialLinks" :key="item.name">
-          <a :href="item.href" target="_blank" :aria-label="`${item.name} link`" rel="noreferer, noopener">
-            <i :class="`pi ${item.icon}`"/>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="footer-row footer-row-2">
-      <span>© {{ new Date().getFullYear() }}</span>
-    </div>
-  </footer>
+<footer class="footer">
+  <div class="footer-row footer-row-1 container">
+    <h3>Contacts</h3>
+    <ul class="social-media">
+      <li v-for="item in socialLinks" :key="item.name">
+        <a :href="item.href" target="_blank" :aria-label="`${item.name} link`" rel="noreferer, noopener">
+          <i :class="`pi ${item.icon}`" />
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="footer-row footer-row-2 container">
+    <span>© {{ new Date().getFullYear() }}</span>
+  </div>
+</footer>
 </template>
 
 <style scoped lang="scss">

@@ -1,5 +1,5 @@
 {
-  "name": "ai-embedding-search",
+  "name": "semantic-search",
   "type": "module",
   "private": true,
   "scripts": {

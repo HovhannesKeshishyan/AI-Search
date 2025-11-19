@@ -8,3 +8,16 @@
     @return $value;
   }
 }
+
+.container {
+  width: 100%;
+  max-width: 1224px;
+  margin: 0 auto;
+  padding: 0 pxToRem(48px);
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    padding: 0 pxToRem(20px);
+  }
+}

@@ -9,48 +9,51 @@ async function handleLogout() {
 </script>
 
 <template>
-<header>
-  <nav>
-    <div class="logo">
-      <NuxtLink to="/">
-        <NuxtImg src="/logo.png"/>
-      </NuxtLink>
-    </div>
-    <div v-if="user" class="admin-section">
-      <span>Welcome, {{ user.name }} ({{ user.role }})</span>
+<div class="container">
+  <header class="header">
+    <nav class="nav">
+      <div class="app-title">
+        <NuxtLink to="/">
+          <h1>Semantic Search</h1>
+        </NuxtLink>
+      </div>
+      <div v-if="user" class="admin-section">
+        <span>Welcome, {{ user.name }} ({{ user.role }})</span>
 
-      
-      <NuxtLink to="/product/add">
-         <Button label="Add Product"/>
-      </NuxtLink>
 
-      <Button severity="danger" label="Logout" @click="handleLogout"/>
-    </div>
-    <div v-else>
-      <NuxtLink to="/login">
-         <Button label="Login"/>
-      </NuxtLink>
-    </div>
-  </nav>
-</header>
+        <NuxtLink to="/product/add">
+          <Button label="Add Product" />
+        </NuxtLink>
+
+        <Button severity="danger" label="Logout" @click="handleLogout" />
+      </div>
+      <div v-else>
+        <NuxtLink to="/login">
+          <Button label="Login" />
+        </NuxtLink>
+      </div>
+    </nav>
+  </header>
+</div>
 </template>
 
 <style scoped lang="scss">
-header {
-  padding: pxToRem(20px);
+.header {
+  padding: pxToRem(20px) 0;
   border-bottom: 1px solid #ccc;
-
-  nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: pxToRem(20px);
-    justify-content: space-between;
-    align-items: center;
-  }
 }
 
-.logo img {
-  height: pxToRem(50px);
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: pxToRem(20px);
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-title a {
+  text-decoration: none;
+  color: white;
 }
 
 .admin-section {
