@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   const finalProduct = {
     ...product,
     id: crypto.randomUUID(),
-    embeddings: await generateEmbedding(product.title),
+    embeddings: await generateEmbedding(product.title.toLowerCase()),
   }
 
   products.push(finalProduct);

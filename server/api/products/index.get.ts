@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
   const isSemanticSearch = enableSemanticSearch === "true";
 
   const semanticSearchValue = isSemanticSearch
-    ? await generateEmbedding(search)
+    ? await generateEmbedding(search.toLowerCase())
     : null;
 
   if (semanticSearchValue) {

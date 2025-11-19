@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
 
   const isTitleChanged = editedProduct.title !== products[productIndex].title;
   const embeddings = isTitleChanged
-    ? await generateEmbedding(editedProduct.title)
+    ? await generateEmbedding(editedProduct.title.toLowerCase())
     : products[productIndex].embeddings;
   const updatedProduct: Product = {
     ...editedProduct,
