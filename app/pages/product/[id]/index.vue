@@ -35,51 +35,47 @@ const deleteProduct = async () => {
 </script>
 
 <template>
-  <div v-if="!product">Product not found</div>
+<div v-if="!product">Product not found</div>
 
-  <div v-else class="product-page">
-    <div class="image-wrapper">
-      <NuxtImg
-        :src="product.image"
-        width="500"
-        height="500"
-        quality="80"
-        :alt="product.title"
-      />
-    </div>
+<div v-else class="product-page">
+  <div class="image-wrapper">
+    <NuxtImg :src="product.image" width="500" height="500" quality="80" :alt="product.title" />
+  </div>
 
-    <div class="content-wrapper">
-      <h1 class="title">{{ product.title }}</h1>
-      <p class="price">${{ Number(product.price).toFixed(2) }}</p>
-      <h2 class="description-label">Description</h2>
-      <p class="description">{{ product.description }}</p>
+  <div class="product-info">
+    <h1 class="info-block title">
+      <i>Title:</i>
+      {{ product.title }}
+    </h1>
+    <p class="info-block price">
+      <i>Price:</i>
+      ${{ Number(product.price).toFixed(2) }}
+    </p>
+    <p class="info-block description">
+      <i>Description:</i>
+      {{ product.description }}
+    </p>
 
-      <div v-if="user?.role === 'ADMIN'" class="buttons-wrapper">
-        <Button label="Edit" severity="success" @click="navigateToEditPage" />
+    <div v-if="user?.role === 'ADMIN'" class="buttons-wrapper">
+      <Button label="Edit" severity="success" @click="navigateToEditPage" />
 
-        <Button
-          :disabled="isDeleting"
-          :loading="isDeleting"
-          label="Delete"
-          severity="danger"
-          @click="deleteProduct"
-        />
-      </div>
+      <Button :disabled="isDeleting" :loading="isDeleting" label="Delete" severity="danger" @click="deleteProduct" />
     </div>
   </div>
+</div>
 </template>
 
 <style lang="scss" scoped>
 .product-page {
   display: flex;
-  background-color: white;
   gap: pxToRem(16px);
-  padding: pxToRem(16px);
-  border-radius: pxToRem(20px);
+  padding: pxToRem(16px) 0;
 }
 
 .image-wrapper {
   position: relative;
+  border-radius: pxToRem(15px);
+  overflow: hidden;
   display: flex;
   width: 50%;
   aspect-ratio: 1 / 1;
@@ -92,18 +88,31 @@ const deleteProduct = async () => {
   }
 }
 
-.content-wrapper {
+.product-info {
   display: flex;
   flex-direction: column;
   width: 50%;
-  color: #000;
+  color: white;
+  gap: pxToRem(10px);
+}
+
+.info-block {
+  display: flex;
+  flex-wrap: wrap;
+  gap: pxToRem(10px);
 }
 
 .price {
-  color: #008236;
+  font-size: pxToRem(30px);
+  color: darkcyan;
+}
+
+.description {
+  font-size: pxToRem(20px);
 }
 
 .buttons-wrapper {
+  margin-top: auto;
   display: flex;
   flex-direction: column;
   gap: pxToRem(20px);
@@ -124,6 +133,21 @@ const deleteProduct = async () => {
 
   &:hover {
     background-color: #03d259;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .product-page {
+    flex-direction: column;
+
+    .image-wrapper,
+    .product-info {
+      width: 100%;
+    }
+
+    .buttons-wrapper {
+      margin-top: pxToRem(30px);
+    }
   }
 }
 </style>

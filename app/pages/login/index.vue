@@ -67,10 +67,6 @@ async function handleLogin() {
 
         <p v-if="errorMsg" class="error">{{ errorMsg }}</p>
       </form>
-
-      <p class="hint">
-        Hint: admin@example.com (admin) or user@example.com (user)
-      </p>
     </div>
   </div>
 </template>
@@ -152,12 +148,5 @@ input:focus {
   color: #e11d48;
   font-size: pxToRem(14px);
   margin-top: pxToRem(6px);
-}
-
-.hint {
-  margin-top: pxToRem(16px);
-  text-align: center;
-  font-size: pxToRem(14px);
-  color: #777;
 }
 </style>

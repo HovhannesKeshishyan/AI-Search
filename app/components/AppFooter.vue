@@ -30,8 +30,8 @@ const socialLinks: SocialMedia[] = [
 </script>
 
 <template>
-<footer class="footer">
-  <div class="footer-row footer-row-1 container">
+<footer class="footer container">
+  <div class="footer-row footer-row-1">
     <h3>Contacts</h3>
     <ul class="social-media">
       <li v-for="item in socialLinks" :key="item.name">
@@ -41,17 +41,21 @@ const socialLinks: SocialMedia[] = [
       </li>
     </ul>
   </div>
-  <div class="footer-row footer-row-2 container">
+  <div class="footer-row footer-row-2">
     <span>© {{ new Date().getFullYear() }}</span>
   </div>
 </footer>
 </template>
 
 <style scoped lang="scss">
-.footer {
+footer.footer {
   width: 100%;
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 767px) {
+    padding: 0;
+  }
 
   .footer-row {
     width: 100%;

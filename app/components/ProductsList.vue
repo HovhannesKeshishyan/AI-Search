@@ -19,7 +19,7 @@ defineProps<{ products: Product[] }>();
 .products-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: pxToRem(16px);
+  gap: pxToRem(30px) pxToRem(16px);
   padding: pxToRem(20px) 0;
 
   a {
