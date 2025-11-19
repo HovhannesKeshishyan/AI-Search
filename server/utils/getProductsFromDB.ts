@@ -7,10 +7,12 @@ export const getProductsFromDB = async (event: H3Event): Promise<Product[]> => {
   let products: Product[] = [];
   try {
     const redis = event.context.redis;
+    if (!redis) {
+      console.log("event.context.redis is undefined");
+      return [];
+    }
     const productsFromDB = await redis.get(KEY);
-    products = productsFromDB
-      ? JSON.parse(productsFromDB)
-      : [];
+    products = productsFromDB ? JSON.parse(productsFromDB) : [];
   } catch (error) {
     console.log(error);
   }

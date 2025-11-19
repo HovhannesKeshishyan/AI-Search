@@ -2,36 +2,32 @@ import { createClient } from "redis";
 
 let redisClient: ReturnType<typeof createClient> | null = null;
 
-export default defineNitroPlugin(async (nitroApp) => {
-  if (redisClient) return;
-
+export default defineNitroPlugin((nitroApp) => {
   const config = useRuntimeConfig();
 
-  const redisUrl = config.redisUrl;
+  // We register the hook IMMEDIATELY so no request slips through
+  nitroApp.hooks.hook("request", async (event) => {
+    // 1. Initialize client if it doesn't exist
+    if (!redisClient) {
+      redisClient = createClient({ url: config.redisUrl });
+      redisClient.on("error", (err) =>
+        console.error("Redis Client Error", err)
+      );
+    }
 
-  try {
-    redisClient = createClient({ url: redisUrl });
+    // 2. Ensure connection is open before attaching
+    if (!redisClient.isOpen) {
+      try {
+        // This ensures we don't try to connect multiple times in parallel
+        // inside a single serverless instance
+        await redisClient.connect();
+        console.log("Connected to Redis");
+      } catch (error) {
+        console.error("Redis connection failed", error);
+      }
+    }
 
-    redisClient.on("error", (err) => console.error("Redis Client Error", err));
-
-    await redisClient.connect();
-    console.log("Successfully connected to Redis.");
-
-    // Inject the client into the Nitro application context
-    // This makes it available in your API routes and server middleware
-    nitroApp.hooks.hook("request", (event) => {
-      event.context.redis = redisClient;
-    });
-
-  } catch (error) {
-    console.error("Failed to connect to Redis:", error);
-  }
+    // 3. Attach to context (Nitro waits for this async function to finish)
+    event.context.redis = redisClient;
+  });
 });
-
-// You might also want to export a utility to access the client outside of hooks
-// export function useRedisClient() {
-//   if (!redisClient) {
-//     throw new Error('Redis client not initialized');
-//   }
-//   return redisClient;
-// }
