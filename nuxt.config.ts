@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@nuxt/image",
     "@primevue/nuxt-module",
+    "@nuxt/fonts",
   ],
 
   app: {
