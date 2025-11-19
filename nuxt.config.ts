@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@primevue/nuxt-module",
   ],
-  css: ["~/assets/css/global.css"],
+  css: ["~/assets/css/global.scss"],
   image: {
     domains: ["https://images.unsplash.com"],
   },
@@ -23,6 +23,9 @@ export default defineNuxtConfig({
     options: {
       theme: {
         preset: Aura,
+        options: {
+            darkModeSelector: false
+        }
       },
     },
   },
