@@ -21,17 +21,17 @@ const isEmpty = computed(() => !data.value?.products.length);
   <section class="search-section">
     <div class="search-input-wrapper">
       <label for="search">Search</label>
-      <InputText id="search" v-model="search" :disabled="isEmpty" type="search" placeholder="Search" />
+      <InputText id="search" v-model="search" type="search" placeholder="Search" />
     </div>
 
     <div class="semantic-search-wrapper">
       <label for="semantic">Enable Semantic Search</label>
-      <Checkbox v-model="enableSemanticSearch" :disabled="isEmpty" input-id="semantic" :binary="true" />
+      <Checkbox v-model="enableSemanticSearch" input-id="semantic" :binary="true" />
     </div>
   </section>
 
   <section class="products-section">
-    <Message v-if="isEmpty" severity="warn">Warn Message</Message>
+    <Message v-if="isEmpty" severity="warn">Products list is empty</Message>
     <ProductsList v-else :products="data?.products || []" />
   </section>
 </div>
