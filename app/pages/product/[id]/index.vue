@@ -66,6 +66,8 @@ const deleteProduct = async () => {
 </template>
 
 <style lang="scss" scoped>
+@use "~/assets/css/breackpoints.scss";
+
 .product-page {
   display: flex;
   gap: pxToRem(16px);
@@ -136,7 +138,7 @@ const deleteProduct = async () => {
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: breackpoints.$tablet) {
   .product-page {
     flex-direction: column;
 

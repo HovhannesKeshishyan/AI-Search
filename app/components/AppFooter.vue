@@ -48,12 +48,14 @@ const socialLinks: SocialMedia[] = [
 </template>
 
 <style scoped lang="scss">
+@use "~/assets/css/breackpoints.scss";
+
 footer.footer {
   width: 100%;
   display: flex;
   flex-direction: column;
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: breackpoints.$tablet) {
     padding: 0;
   }
 
@@ -105,7 +107,7 @@ footer.footer {
     }
   }
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: breackpoints.$mobile) {
     .footer-row {
       font-size: pxToRem(22px);
     }

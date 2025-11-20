@@ -1,4 +1,5 @@
 @use "sass:math";
+@use "./breackpoints.scss";
 
 @function pxToRem($value, $base-font-size: 16px) {
   @if (math.unit($value) == "px") {
@@ -16,7 +17,7 @@
   padding: 0 pxToRem(48px);
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: breackpoints.$tablet) {
   .container {
     padding: 0 pxToRem(20px);
   }
