@@ -1,75 +1,66 @@
-# Nuxt Minimal Starter
+# AI-Search
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Author: Hovhannes Keshishyan
 
-## Setup
 
-Make sure to install dependencies:
+[![Live Demo](https://img.shields.io/badge/demo-ai--search--semantic.vercel.app-brightgreen)](https://ai-search-semantic.vercel.app)
 
-```bash
-# npm
-npm install
+**AI-Search** is a semantic search web application built with **Nuxt.js**, **TypeScript**, and the **Vercel AI SDK**. It allows users to ask natural language queries and get intelligent, context-aware responses from indexed content.
 
-# pnpm
-pnpm install
+---
 
-# yarn
-yarn install
+## 🧠 Features
 
-# bun
-bun install
-```
+- **Natural-Language Search**: Users can type conversational queries, not just keywords.  
+- **Semantic Embeddings**: Content is embedded into vector space, enabling meaning-based retrieval.
 
-## Development Server
+---
 
-Start the development server on `http://localhost:3000`:
+## 📁 Architecture
 
-```bash
-# npm
-npm run dev
+The repo is structured into several main parts:
 
-# pnpm
-pnpm dev
+- `app/`: Nuxt application — pages, and components.  
+- `server/`: Backend logic — handles embedding generation, query processing, and AI interaction.  
+- `shared/`: Shared utilities, types, and code used across frontend and backend.  
+- `public/`: Static assets.  
+- `.env.example`: Sample environment variables file.
 
-# yarn
-yarn dev
+---
 
-# bun
-bun run dev
-```
+## 🚀 Getting Started
 
-## Production
+Here’s how to run the project locally:
 
-Build the application for production:
+1. **Clone the repo**
 
-```bash
-# npm
-npm run build
+   ```bash
+   git clone https://github.com/HovhannesKeshishyan/AI-Search.git
+   
+2. **Go to project directory**
 
-# pnpm
-pnpm build
+   ```bash
+   cd AI-Search
 
-# yarn
-yarn build
+3. **Install dependancies**
 
-# bun
-bun run build
-```
+   ```bash
+   npm install
 
-Locally preview production build:
+4. **Copy .env.example to .env and fill in the required keys**
 
-```bash
-# npm
-npm run preview
 
-# pnpm
-pnpm preview
+5. **Production build**
 
-# yarn
-yarn preview
+   ```bash
+   npm run build
 
-# bun
-bun run preview
-```
+6. **Preview production build**
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+   ```bash
+   npm run preview 
+
+7. **Development build with HMR**
+
+   ```bash
+   npm run dev
