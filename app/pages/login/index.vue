@@ -3,6 +3,10 @@ definePageMeta({
   middleware: ["guest"],
 });
 
+useSeoMeta({
+  title: "Login page"
+})
+
 const user = useAuthUser();
 const username = ref("");
 const password = ref("");

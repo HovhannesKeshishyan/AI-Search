@@ -4,6 +4,10 @@ import { refDebounced } from "@vueuse/core";
 import InputText from "primevue/inputtext";
 import Checkbox from "primevue/checkbox";
 
+definePageMeta({
+  title: "Hello"
+});
+
 const SEMANTIC_SEARCH_DESCRIPTION = "Semantic search is an advanced search technique that understands the context and intent behind a user's query, rather than just matching keywords."
 
 const search = ref("");

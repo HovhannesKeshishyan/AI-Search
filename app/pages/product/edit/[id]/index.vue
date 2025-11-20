@@ -7,6 +7,10 @@ const route = useRoute();
 const id = route.params.id;
 
 const { data: product } = await useFetch<Product>(`/api/products/${id}`);
+
+useSeoMeta({
+  title: `Edit product ${product.value?.title}`
+})
 </script>
 
 <template>

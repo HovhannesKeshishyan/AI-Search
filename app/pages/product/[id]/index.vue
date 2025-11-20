@@ -11,6 +11,18 @@ const isDeleting = ref(false);
 
 const { data: product } = await useFetch<Product>(`/api/products/${id}`);
 
+const metaTags = computed(() => {
+  return {
+    title: product?.value?.title,
+    description: product?.value?.description
+  }
+});
+
+useSeoMeta({
+  title: metaTags.value.title,
+  description: metaTags.value.description
+})
+
 const navigateToEditPage = () => {
   router.push(`/product/edit/${id}`);
 };

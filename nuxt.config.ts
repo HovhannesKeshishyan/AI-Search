@@ -15,6 +15,14 @@ export default defineNuxtConfig({
 
   app: {
     head: {
+      title: "Semantic Search",
+      htmlAttrs: {
+        lang: "en",
+      },
+      meta: [{
+        name: "description",
+        content: "web app for searching producs, using semantic search AI features for perfect search"
+      }],
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.svg" }],
     },
   },

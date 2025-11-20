@@ -1,5 +1,7 @@
 <script lang="ts" setup>
-
+useSeoMeta({
+  title: "Add new product"
+})
 </script>
 
 <template>
