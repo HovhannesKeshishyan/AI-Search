@@ -36,7 +36,6 @@ export default defineNuxtConfig({
   runtimeConfig: {
     jwtAccessSecret: process.env.JWT_ACCESS_SECRET,
     redisUrl: process.env.REDIS_URL,
-    redisDbKey: process.env.REDIS_DATA_KEY,
     public: {},
   },
 

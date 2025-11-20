@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const products = await getProductsFromDB(event);
+  const products = await getProductsFromDB();
 
   const deletingProductIndex = products.findIndex(p => p.id === id);
 
@@ -22,6 +22,6 @@ export default defineEventHandler(async (event) => {
   
   const deletedProduct = products.splice(deletingProductIndex, 1);
 
-  await addProductsToDB(event, products);
+  await addProductsToDB(products);
   return deletedProduct;
 })

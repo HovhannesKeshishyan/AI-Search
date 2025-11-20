@@ -2,7 +2,7 @@ export default defineEventHandler(async (event) => {
   const body = await readBody<{product: ProductFormState;}>(event);
   const product = body?.product;
 
-  const products = await getProductsFromDB(event);
+  const products = await getProductsFromDB();
 
   const finalProduct = {
     ...product,
@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
 
   products.push(finalProduct);
 
-  await addProductsToDB(event, products);
+  await addProductsToDB(products);
 
   return getProductDTO(finalProduct);
 });

@@ -4,7 +4,7 @@ export default defineEventHandler(async (event) => {
     product: ProductFormState;
   }>(event);
 
-  const products = await getProductsFromDB(event);
+  const products = await getProductsFromDB();
 
   const productIndex = products.findIndex((p) => p.id === id);
 
@@ -28,7 +28,7 @@ export default defineEventHandler(async (event) => {
   // maybe can skip this
   products[productIndex] = updatedProduct;
 
-  await addProductsToDB(event, products);
+  await addProductsToDB(products);
 
   return getProductDTO(products[productIndex]);
 });

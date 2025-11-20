@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
   try {
     const body = await readBody<{ username: string; password: string }>(event);
 
-    const user = await getAdminCredentialsFromDB(event);
+    const user = await getAdminCredentialsFromDB();
 
     if (!user || user.username !== body.username) {
       return throwAuthError();

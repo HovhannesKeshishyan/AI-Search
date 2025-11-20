@@ -1,7 +1,4 @@
-import type { H3Event } from "h3";
-
-const KEY = "PRODUCTS_ADMIN";
-
+import { redis } from "~~/server/utils/redis";
 interface AdminCredentials {
     id: number;
     username: string;
@@ -10,11 +7,10 @@ interface AdminCredentials {
     name: string;
 }
 
-export const getAdminCredentialsFromDB = async (event: H3Event): Promise<AdminCredentials> => {
+export const getAdminCredentialsFromDB = async (): Promise<AdminCredentials | null> => {
   try {
-    const redis = event.context.redis;
-    const adminCredentials = await redis.get(KEY);
-    return JSON.parse(adminCredentials);
+    const adminCredentials = await redis.get<AdminCredentials>("PRODUCTS_ADMIN");
+    return adminCredentials;
   } catch (error) {
     console.log(error);
     throw new Error("Can't get admin credentials");
