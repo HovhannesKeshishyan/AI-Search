@@ -4,6 +4,8 @@ import { refDebounced } from "@vueuse/core";
 import InputText from "primevue/inputtext";
 import Checkbox from "primevue/checkbox";
 
+const SEMANTIC_SEARCH_DESCRIPTION = "Semantic search is an advanced search technique that understands the context and intent behind a user's query, rather than just matching keywords."
+
 const search = ref("");
 const debouncedSearch = refDebounced(search, 200);
 const enableSemanticSearch = ref(false);
@@ -27,6 +29,7 @@ const isEmpty = computed(() => !data.value?.products.length);
     <div class="semantic-search-wrapper">
       <label for="semantic">Enable Semantic Search</label>
       <Checkbox v-model="enableSemanticSearch" input-id="semantic" :binary="true" />
+      <i v-tooltip="SEMANTIC_SEARCH_DESCRIPTION" class="pi pi-info-circle"/>
     </div>
   </section>
 
