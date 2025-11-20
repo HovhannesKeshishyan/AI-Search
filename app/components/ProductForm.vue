@@ -119,7 +119,7 @@ const onFormSubmit = async (e: FormSubmitEvent<Record<string, string>>) => {
         :disabled="isSubmiting"
         :loading="isSubmiting"
         type="submit"
-        severity="secondary"
+        severity="success"
         label="Submit"
       />
     </Form>
