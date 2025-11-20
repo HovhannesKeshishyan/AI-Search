@@ -7,6 +7,8 @@ const props = defineProps<{
   product?: Product;
 }>();
 
+const { $api } = useNuxtApp();
+
 const id = props.product?.id || null;
 
 let initialState = {} as ProductFormState;
@@ -40,7 +42,7 @@ const onFormSubmit = async (e: FormSubmitEvent<Record<string, string>>) => {
     }
     // edit mode
     const method = id ? "PUT" : "POST";
-    await $fetch("/api/products", {
+    await $api("/api/products", {
       method: method,
       body: payload,
     });
