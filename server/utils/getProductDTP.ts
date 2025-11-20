@@ -6,6 +6,6 @@ export const getProductDTO = (product: Product) => {
     description,
     price,
     image,
-    hasEmbedings: product.embeddings?.length,
+    hasEmbedings: !!product.embeddings?.length,
   };
 };
