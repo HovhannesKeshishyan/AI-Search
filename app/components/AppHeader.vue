@@ -9,32 +9,33 @@ async function handleLogout() {
 </script>
 
 <template>
-<div class="container">
-  <header class="header">
-    <nav class="nav">
-      <div class="app-title">
-        <NuxtLink to="/">
-          <h1>Semantic Search</h1>
-        </NuxtLink>
-      </div>
-      <div v-if="user" class="admin-section">
-        <span>Welcome, {{ user.name }} ({{ user.role }})</span>
+  <div class="container">
+    <header class="header">
+      <nav class="nav">
+        <div class="app-title">
+          <NuxtLink to="/">
+            <h1>Semantic Search</h1>
+          </NuxtLink>
+        </div>
+        <div v-if="user" class="admin-section">
+          <span>Welcome, {{ user.name }} ({{ user.role }})</span>
 
+          <div class="buttons-wrapper">
+            <NuxtLink to="/product/add">
+              <Button label="Add Product" />
+            </NuxtLink>
 
-        <NuxtLink to="/product/add">
-          <Button label="Add Product" />
-        </NuxtLink>
-
-        <Button severity="danger" label="Logout" @click="handleLogout" />
-      </div>
-      <div v-else>
-        <NuxtLink to="/login">
-          <Button label="Login" />
-        </NuxtLink>
-      </div>
-    </nav>
-  </header>
-</div>
+            <Button severity="danger" label="Logout" @click="handleLogout" />
+          </div>
+        </div>
+        <div v-else>
+          <NuxtLink to="/login">
+            <Button label="Login" />
+          </NuxtLink>
+        </div>
+      </nav>
+    </header>
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -60,5 +61,17 @@ async function handleLogout() {
   display: flex;
   gap: pxToRem(10px);
   align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.buttons-wrapper {
+  display: flex;
+  gap: pxToRem(10px);
+  flex-wrap: wrap;
+
+  button {
+    white-space: nowrap;
+  }
 }
 </style>
