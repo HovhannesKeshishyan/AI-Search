@@ -9,7 +9,7 @@ async function handleLogout() {
 </script>
 
 <template>
-  <div class="container">
+  <div class="container header-container">
     <header class="header">
       <nav class="nav">
         <div class="app-title">
@@ -39,6 +39,15 @@ async function handleLogout() {
 </template>
 
 <style scoped lang="scss">
+@use "~/assets/css/colors.scss";
+
+.header-container {
+  position: sticky;
+  top: 0;
+  z-index: 9000;
+  background-color: colors.$bg-dark;
+}
+
 .header {
   padding: pxToRem(20px) 0;
   border-bottom: 1px solid white;
