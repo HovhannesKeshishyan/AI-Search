@@ -1,3 +1,4 @@
+@use "./colors.scss";
 @import "primeicons/primeicons.css";
 
 :root {
@@ -6,7 +7,7 @@
   font-weight: 400;
   color-scheme: light dark;
   color: white;
-  background-color: #242424;
+  background-color: colors.$bg-dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

@@ -79,6 +79,7 @@ const deleteProduct = async () => {
 
 <style lang="scss" scoped>
 @use "~/assets/css/breackpoints.scss";
+@use "~/assets/css/colors.scss";
 
 .product-page {
   display: flex;
@@ -118,7 +119,7 @@ const deleteProduct = async () => {
 
 .price {
   font-size: pxToRem(30px);
-  color: darkcyan;
+  color: colors.$primary;
 }
 
 .description {
@@ -130,24 +131,6 @@ const deleteProduct = async () => {
   display: flex;
   flex-direction: column;
   gap: pxToRem(20px);
-}
-
-.edit-button {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #31ef80;
-  padding: pxToRem(15px) pxToRem(20px);
-  border-radius: pxToRem(20px);
-  font-size: pxToRem(20px);
-  color: #000;
-  transition: background-color 0.2s ease-in-out;
-  text-decoration: none;
-
-  &:hover {
-    background-color: #03d259;
-  }
 }
 
 @media screen and (max-width: breackpoints.$tablet) {

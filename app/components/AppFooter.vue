@@ -49,6 +49,7 @@ const socialLinks: SocialMedia[] = [
 
 <style scoped lang="scss">
 @use "~/assets/css/breackpoints.scss";
+@use "~/assets/css/colors.scss";
 
 footer.footer {
   width: 100%;
@@ -68,7 +69,7 @@ footer.footer {
   }
 
   .footer-row-1 {
-    background-color: #03a9f4;
+    background-color: colors.$primary;
     color: black;
     justify-content: space-between;
     padding: pxToRem(15px) pxToRem(40px) pxToRem(15px) pxToRem(15px);

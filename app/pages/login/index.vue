@@ -82,7 +82,7 @@ async function handleLogin() {
   align-items: center;
   min-height: 100vh;
   background: #f5f6fa;
-  color: #000;
+  color: black;
   padding: pxToRem(20px);
 }
 

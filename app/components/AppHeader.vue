@@ -41,7 +41,7 @@ async function handleLogout() {
 <style scoped lang="scss">
 .header {
   padding: pxToRem(20px) 0;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid white;
 }
 
 .nav {

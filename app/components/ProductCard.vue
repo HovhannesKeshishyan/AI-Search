@@ -21,12 +21,14 @@ defineProps<{
 </template>
 
 <style lang="scss" scoped>
+@use "~/assets/css/colors.scss";
+
 .product-card {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 8px 1px darkcyan;
+  box-shadow: 0 0 8px 1px colors.$primary;;
   border-radius: pxToRem(20px);
   overflow: hidden;
   transition: scale 0.2s ease-in-out;
@@ -66,12 +68,12 @@ defineProps<{
 
 .product-description {
   font-size: pxToRem(20px);
-  color: #9d9d9d;
+  color: colors.$text-secondary;
 }
 
 .product-price {
   margin-top: auto;
   font-size: pxToRem(24px);
-  color: darkcyan;
+  color: colors.$primary;
 }
 </style>
