@@ -29,6 +29,13 @@ defineProps<{
   box-shadow: 0 0 8px 1px darkcyan;
   border-radius: pxToRem(20px);
   overflow: hidden;
+  transition: scale 0.2s ease-in-out;
+
+  @media (hover: hover) {
+      &:hover {
+        scale: 1.02;
+      }
+    }
 }
 
 .image-wrapper {
