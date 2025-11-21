@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ProgressSpinner from "primevue/progressspinner";
 import Message from "primevue/message";
 import { refDebounced } from "@vueuse/core";
 import InputText from "primevue/inputtext";
@@ -14,7 +15,7 @@ const search = ref("");
 const debouncedSearch = refDebounced(search, 200);
 const enableSemanticSearch = ref(false);
 
-const { data } = await useFetch(
+const { data, status } = await useFetch(
   () =>
     `/api/products?search=${debouncedSearch.value}&enableSemanticSearch=${enableSemanticSearch.value}`
 );
@@ -23,7 +24,7 @@ const isEmpty = computed(() => !data.value?.products.length);
 </script>
 
 <template>
-<div>
+<div class="home-page">
   <section class="search-section">
     <div class="search-input-wrapper">
       <label for="search">Search</label>
@@ -38,8 +39,13 @@ const isEmpty = computed(() => !data.value?.products.length);
   </section>
 
   <section class="products-section">
-    <Message v-if="isEmpty" severity="warn">Products list is empty</Message>
-    <ProductsList v-else :products="data?.products || []" />
+    <div v-if="status === 'pending'" class="progress-spinner-container">
+       <ProgressSpinner/>
+    </div>    
+    <div :class="`products-list-container ${status === 'pending' ? 'loading' : ''}`">
+       <Message v-if="isEmpty" severity="warn">Products list is empty</Message>
+       <ProductsList v-else :products="data?.products || []" />
+    </div>
   </section>
 </div>
 </template>
@@ -73,6 +79,26 @@ const isEmpty = computed(() => !data.value?.products.length);
 }
 
 .products-section {
+  position: relative;
   margin-top: pxToRem(20px);
+}
+
+.progress-spinner-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  z-index: 9999;
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.products-list-container {
+  &.loading {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 }
 </style>
