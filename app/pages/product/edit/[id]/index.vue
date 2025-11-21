@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 definePageMeta({
-  middleware: ["admin"]
+  middleware: ["admin"],
 });
 
 const route = useRoute();
@@ -9,14 +9,12 @@ const id = route.params.id;
 const { data: product } = await useFetch<Product>(`/api/products/${id}`);
 
 useSeoMeta({
-  title: `Edit product ${product.value?.title}`
-})
+  title: `Edit product ${product.value?.title}`,
+});
 </script>
 
 <template>
-  <ProductForm :product="product"/>
+  <ProductForm :product="product" />
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

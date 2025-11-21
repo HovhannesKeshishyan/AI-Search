@@ -5,11 +5,8 @@ import { refDebounced } from "@vueuse/core";
 import InputText from "primevue/inputtext";
 import Checkbox from "primevue/checkbox";
 
-definePageMeta({
-  title: "Hello"
-});
-
-const SEMANTIC_SEARCH_DESCRIPTION = "Semantic search is an advanced search technique that understands the context and intent behind a user's query, rather than just matching keywords."
+const SEMANTIC_SEARCH_DESCRIPTION =
+  "Semantic search is an advanced search technique that understands the context and intent behind a user's query, rather than just matching keywords.";
 
 const search = ref("");
 const debouncedSearch = refDebounced(search, 200);
@@ -24,30 +21,47 @@ const isEmpty = computed(() => !data.value?.products.length);
 </script>
 
 <template>
-<div class="home-page">
-  <section class="search-section">
-    <div class="search-input-wrapper">
-      <label for="search">Search</label>
-      <InputText id="search" v-model="search" type="search" placeholder="Search" />
-    </div>
+  <div class="home-page">
+    <section class="search-section">
+      <div class="search-input-wrapper">
+        <label for="search">Search</label>
+        <InputText
+          id="search"
+          v-model="search"
+          type="search"
+          placeholder="Search"
+        />
+      </div>
 
-    <div class="semantic-search-wrapper">
-      <label for="semantic">Enable Semantic Search</label>
-      <Checkbox v-model="enableSemanticSearch" input-id="semantic" :binary="true" />
-      <i v-tooltip.focus="SEMANTIC_SEARCH_DESCRIPTION" tabindex="0" class="pi pi-info-circle"/>
-    </div>
-  </section>
+      <div class="semantic-search-wrapper">
+        <label for="semantic">Enable Semantic Search</label>
+        <Checkbox
+          v-model="enableSemanticSearch"
+          input-id="semantic"
+          :binary="true"
+        />
+        <i
+          v-tooltip.focus="SEMANTIC_SEARCH_DESCRIPTION"
+          tabindex="0"
+          class="pi pi-info-circle"
+        />
+      </div>
+    </section>
 
-  <section class="products-section">
-    <div v-if="status === 'pending'" class="progress-spinner-container">
-       <ProgressSpinner/>
-    </div>    
-    <div :class="`products-list-container ${status === 'pending' ? 'loading' : ''}`">
-       <Message v-if="isEmpty" severity="warn">Products list is empty</Message>
-       <ProductsList v-else :products="data?.products || []" />
-    </div>
-  </section>
-</div>
+    <section class="products-section">
+      <div v-if="status === 'pending'" class="progress-spinner-container">
+        <ProgressSpinner />
+      </div>
+      <div
+        :class="`products-list-container ${
+          status === 'pending' ? 'loading' : ''
+        }`"
+      >
+        <Message v-if="isEmpty" severity="warn">Products list is empty</Message>
+        <ProductsList v-else :products="data?.products || []" />
+      </div>
+    </section>
+  </div>
 </template>
 
 <style scoped lang="scss">

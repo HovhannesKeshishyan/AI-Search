@@ -2,10 +2,7 @@ import type { H3Event } from "h3";
 
 const needValidatePayload = (event: H3Event) => {
   const { path, method } = event;
-  return (
-    path.startsWith("/api/products") &&
-    ["POST", "PUT"].includes(method)
-  );
+  return path.startsWith("/api/products") && ["POST", "PUT"].includes(method);
 };
 
 export default defineEventHandler(async (event) => {

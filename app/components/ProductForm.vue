@@ -35,11 +35,11 @@ const onFormSubmit = async (e: FormSubmitEvent<Record<string, string>>) => {
 
   isSubmiting.value = true;
 
-  try {    
+  try {
     const payload = {
       id: id || null,
-      product: e.values
-    }
+      product: e.values,
+    };
     // edit mode
     const method = id ? "PUT" : "POST";
     await $api("/api/products", {
@@ -64,11 +64,7 @@ const onFormSubmit = async (e: FormSubmitEvent<Record<string, string>>) => {
   <div class="product-form">
     <h1>{{ id ? "Edit Product" : "Add Product" }}</h1>
 
-    <Form
-      :initial-values="formState"
-      class="form"
-      @submit="onFormSubmit"
-    >
+    <Form :initial-values="formState" class="form" @submit="onFormSubmit">
       <div class="form-input">
         <InputText name="title" type="text" placeholder="Title" fluid />
         <Message
@@ -80,7 +76,7 @@ const onFormSubmit = async (e: FormSubmitEvent<Record<string, string>>) => {
         >
       </div>
       <div class="form-input">
-        <InputText          
+        <InputText
           name="description"
           type="text"
           placeholder="Description"

@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
     enableSemanticSearch: "true" | "false";
   }>(event);
 
-  const products = await getProductsFromDB(event);
+  const products = await getProductsFromDB();
 
   if (!search.trim()) {
     return { products: products };

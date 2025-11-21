@@ -1,5 +1,5 @@
 export default defineEventHandler(async (event) => {
-  const body = await readBody<{product: ProductFormState;}>(event);
+  const body = await readBody<{ product: ProductFormState }>(event);
   const product = body?.product;
 
   const products = await getProductsFromDB();
@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
     ...product,
     id: crypto.randomUUID(),
     embeddings: await generateEmbedding(product.title.toLowerCase()),
-  }
+  };
 
   products.push(finalProduct);
 

@@ -7,8 +7,8 @@ export default defineEventHandler(async (event) => {
       statusMessage: "id is required",
     });
   }
-  
-  const products = await getProductsFromDB(event);
+
+  const products = await getProductsFromDB();
 
   const product = products.find((p) => p.id === id);
   if (product) return product;

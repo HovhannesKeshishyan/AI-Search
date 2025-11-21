@@ -1,13 +1,11 @@
 <script lang="ts" setup>
 useSeoMeta({
-  title: "Add new product"
-})
+  title: "Add new product",
+});
 </script>
 
 <template>
-  <ProductForm/>
+  <ProductForm />
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

@@ -5,19 +5,26 @@ defineProps<{
 </script>
 
 <template>
-<div class="product-card">
-  <div class="image-wrapper">
-    <NuxtImg :src="product.image" width="300" height="200" quality="80" fit="cover" :alt="product.title" />
+  <div class="product-card">
+    <div class="image-wrapper">
+      <NuxtImg
+        :src="product.image"
+        width="300"
+        height="200"
+        quality="80"
+        fit="cover"
+        :alt="product.title"
+      />
+    </div>
+
+    <div class="product-card-body">
+      <h2 class="product-title">{{ product.title }}</h2>
+
+      <h3 class="product-description">{{ product.description }}</h3>
+
+      <div class="product-price">${{ Number(product.price).toFixed(2) }}</div>
+    </div>
   </div>
-
-  <div class="product-card-body">
-    <h2 class="product-title">{{ product.title }}</h2>
-
-    <h3 class="product-description">{{ product.description }}</h3>
-
-    <div class="product-price">${{ Number(product.price).toFixed(2) }}</div>
-  </div>
-</div>
 </template>
 
 <style lang="scss" scoped>
@@ -28,16 +35,16 @@ defineProps<{
   height: 100%;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 8px 1px colors.$primary;;
+  box-shadow: 0 0 8px 1px colors.$primary;
   border-radius: pxToRem(20px);
   overflow: hidden;
   transition: scale 0.2s ease-in-out;
 
   @media (hover: hover) {
-      &:hover {
-        scale: 1.02;
-      }
+    &:hover {
+      scale: 1.02;
     }
+  }
 }
 
 .image-wrapper {

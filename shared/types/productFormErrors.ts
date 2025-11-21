@@ -1,3 +1,3 @@
 import type { ProductFormState } from "./productFormState";
 
-export type ProductFormErrors = Record<keyof ProductFormState, string>
+export type ProductFormErrors = Record<keyof ProductFormState, string>;

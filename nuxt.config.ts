@@ -19,10 +19,13 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: "en",
       },
-      meta: [{
-        name: "description",
-        content: "web app for searching producs, using semantic search AI features for perfect search"
-      }],
+      meta: [
+        {
+          name: "description",
+          content:
+            "web app for searching producs, using semantic search AI features for perfect search",
+        },
+      ],
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.svg" }],
     },
   },

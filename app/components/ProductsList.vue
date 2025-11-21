@@ -3,16 +3,17 @@ defineProps<{ products: Product[] }>();
 </script>
 
 <template>
-<div class="products-list">
-  <NuxtLink 
-     v-for="product in products"
-     :key="product.id"
-     :to="`/product/${product.id}`"
-     class="product-item"
-    :data-has-embeddings="!!product.embeddings?.length">
-    <ProductCard :product="product"/>
-  </NuxtLink>
-</div>
+  <div class="products-list">
+    <NuxtLink
+      v-for="product in products"
+      :key="product.id"
+      :to="`/product/${product.id}`"
+      class="product-item"
+      :data-has-embeddings="!!product.embeddings?.length"
+    >
+      <ProductCard :product="product" />
+    </NuxtLink>
+  </div>
 </template>
 
 <style lang="scss" scoped>

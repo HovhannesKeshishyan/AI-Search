@@ -34,7 +34,7 @@ export default defineEventHandler(async (event) => {
       username: user.username,
       role: user.role,
       name: user.name,
-    }
+    };
     return userDto;
   } catch (error) {
     console.log(error);

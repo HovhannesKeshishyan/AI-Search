@@ -14,14 +14,14 @@ const { data: product } = await useFetch<Product>(`/api/products/${id}`);
 const metaTags = computed(() => {
   return {
     title: product?.value?.title,
-    description: product?.value?.description
-  }
+    description: product?.value?.description,
+  };
 });
 
 useSeoMeta({
   title: metaTags.value.title,
-  description: metaTags.value.description
-})
+  description: metaTags.value.description,
+});
 
 const navigateToEditPage = () => {
   router.push(`/product/edit/${id}`);
@@ -47,34 +47,46 @@ const deleteProduct = async () => {
 </script>
 
 <template>
-<div v-if="!product">Product not found</div>
+  <div v-if="!product">Product not found</div>
 
-<div v-else class="product-page">
-  <div class="image-wrapper">
-    <NuxtImg :src="product.image" width="500" height="500" quality="80" :alt="product.title" />
-  </div>
+  <div v-else class="product-page">
+    <div class="image-wrapper">
+      <NuxtImg
+        :src="product.image"
+        width="500"
+        height="500"
+        quality="80"
+        :alt="product.title"
+      />
+    </div>
 
-  <div class="product-info">
-    <h1 class="info-block title">
-      <i>Title:</i>
-      {{ product.title }}
-    </h1>
-    <p class="info-block price">
-      <i>Price:</i>
-      ${{ Number(product.price).toFixed(2) }}
-    </p>
-    <p class="info-block description">
-      <i>Description:</i>
-      {{ product.description }}
-    </p>
+    <div class="product-info">
+      <h1 class="info-block title">
+        <i>Title:</i>
+        {{ product.title }}
+      </h1>
+      <p class="info-block price">
+        <i>Price:</i>
+        ${{ Number(product.price).toFixed(2) }}
+      </p>
+      <p class="info-block description">
+        <i>Description:</i>
+        {{ product.description }}
+      </p>
 
-    <div v-if="user?.role === 'ADMIN'" class="buttons-wrapper">
-      <Button label="Edit" severity="success" @click="navigateToEditPage" />
+      <div v-if="user?.role === 'ADMIN'" class="buttons-wrapper">
+        <Button label="Edit" severity="success" @click="navigateToEditPage" />
 
-      <Button :disabled="isDeleting" :loading="isDeleting" label="Delete" severity="danger" @click="deleteProduct" />
+        <Button
+          :disabled="isDeleting"
+          :loading="isDeleting"
+          label="Delete"
+          severity="danger"
+          @click="deleteProduct"
+        />
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <style lang="scss" scoped>

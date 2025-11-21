@@ -4,8 +4,8 @@ definePageMeta({
 });
 
 useSeoMeta({
-  title: "Login page"
-})
+  title: "Login page",
+});
 
 const user = useAuthUser();
 const username = ref("");
@@ -53,7 +53,7 @@ async function handleLogin() {
             type="text"
             autocomplete="username"
             required
-          >
+          />
         </div>
 
         <div class="field">
@@ -64,7 +64,7 @@ async function handleLogin() {
             type="password"
             autocomplete="current-password"
             required
-          >
+          />
         </div>
 
         <button class="btn" type="submit">Log in</button>
