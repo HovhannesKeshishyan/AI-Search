@@ -34,7 +34,7 @@ const isEmpty = computed(() => !data.value?.products.length);
     <div class="semantic-search-wrapper">
       <label for="semantic">Enable Semantic Search</label>
       <Checkbox v-model="enableSemanticSearch" input-id="semantic" :binary="true" />
-      <i v-tooltip="SEMANTIC_SEARCH_DESCRIPTION" class="pi pi-info-circle"/>
+      <i v-tooltip.focus="SEMANTIC_SEARCH_DESCRIPTION" tabindex="0" class="pi pi-info-circle"/>
     </div>
   </section>
 
@@ -75,6 +75,10 @@ const isEmpty = computed(() => !data.value?.products.length);
     display: flex;
     align-items: center;
     gap: pxToRem(6px);
+
+    i {
+      font-size: pxToRem(20px);
+    }
   }
 }
 
