@@ -4,6 +4,6 @@ export interface Product {
   description: string;
   price: string;
   imageUrl: string;
-  imagePublicID?: string;
+  imagePublicID: string;
   embeddings: number[] | null;
 }

@@ -30,3 +30,14 @@ export const uploadeImageToCloud = async (image: string): ReturnType => {
     });
   }
 };
+
+export const deleteImageFromCloud = async (publicId: string): Promise<void> => {
+  try {
+    const data = await cloudinary.uploader.destroy(publicId, {
+      invalidate: true,
+    });
+    console.log("Image is deleted from cloudinary: ", data);
+  } catch (error) {
+    console.log("Error deleteing image from cloudinary: ", error);
+  }
+};

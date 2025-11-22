@@ -9,14 +9,6 @@ export default defineEventHandler(async (event) => {
     product: ProductFormState;
   }>(event);
 
-  if (imageIsChanged) {
-    const { publicId, secureUrl } = await uploadeImageToCloud(
-      editedProduct.imageUrl
-    );
-    editedProduct.imageUrl = secureUrl;
-    editedProduct.imagePublicID = publicId;
-  }
-
   const products = await getProductsFromDB();
 
   const productIndex = products.findIndex((p) => p.id === id);
@@ -28,13 +20,26 @@ export default defineEventHandler(async (event) => {
     });
   }
 
+  let imageUrl = "";
+  let imagePublicID = "";
+  if (imageIsChanged) {
+    const { publicId, secureUrl } = await uploadeImageToCloud(
+      editedProduct.imageUrl
+    );
+    imageUrl = secureUrl;
+    imagePublicID = publicId;
+  }
+
   const isTitleChanged = editedProduct.title !== products[productIndex].title;
   const embeddings = isTitleChanged
     ? await generateEmbedding(editedProduct.title.toLowerCase())
     : products[productIndex].embeddings;
+
   const updatedProduct: Product = {
     ...editedProduct,
     id, // id comes as seperate key, to not include in validation
+    imageUrl,
+    imagePublicID,
     embeddings: embeddings,
   };
 

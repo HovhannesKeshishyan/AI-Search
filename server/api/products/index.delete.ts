@@ -22,6 +22,15 @@ export default defineEventHandler(async (event) => {
 
   const deletedProduct = products.splice(deletingProductIndex, 1);
 
+  // if image of product don't have any other usage, delete it from cloud
+  const publicId = deletedProduct[0].imagePublicID;
+  const imageHasOtherUsage = products.find((p) => {
+    return p.id !== id && p.imagePublicID === publicId;
+  });
+  if (!imageHasOtherUsage) {
+    await deleteImageFromCloud(publicId);
+  }
+
   await addProductsToDB(products);
   return deletedProduct;
 });
