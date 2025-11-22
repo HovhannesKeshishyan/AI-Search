@@ -10,8 +10,8 @@ export default defineEventHandler(async (event) => {
   }>(event);
 
   if (imageIsChanged) {
-    const { url } = await uploadeImageToCloud(editedProduct.image);
-    editedProduct.image = url;
+    const { secureUrl } = await uploadeImageToCloud(editedProduct.image);
+    editedProduct.image = secureUrl;
   }
 
   const products = await getProductsFromDB();
