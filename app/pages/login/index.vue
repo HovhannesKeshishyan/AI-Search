@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { toast } from "vue3-toastify";
+
 definePageMeta({
   middleware: ["guest"],
 });
@@ -26,8 +28,8 @@ async function handleLogin() {
     // Update the state
     user.value = userData;
 
-    // Redirect to a protected page or home
     await navigateTo("/");
+    toast(`Welcome ${user.value.name}`);
   } catch (error: unknown) {
     if (error instanceof Error && "data" in error) {
       const data = error.data as { statusMessage: string };
@@ -67,7 +69,7 @@ async function handleLogin() {
           />
         </div>
 
-        <button class="btn" type="submit">Log in</button>
+        <Button label="Login" severity="success" type="submit" />
 
         <p v-if="errorMsg" class="error">{{ errorMsg }}</p>
       </form>
@@ -76,12 +78,11 @@ async function handleLogin() {
 </template>
 
 <style scoped lang="scss">
+@use "~/assets/css/colors.scss";
+
 .login-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: #f5f6fa;
   color: black;
   padding: pxToRem(20px);
 }
@@ -89,14 +90,14 @@ async function handleLogin() {
 .login-card {
   width: 100%;
   max-width: pxToRem(380px);
-  background: #fff;
+  background: white;
   padding: pxToRem(32px);
   border-radius: pxToRem(12px);
-  box-shadow: 0 pxToRem(6px) pxToRem(18px) rgba(0, 0, 0, 0.08);
+  box-shadow: 0 pxToRem(6px) pxToRem(18px) colors.$bg-dark;
 }
 
 .title {
-  margin-bottom: pxToRem(24px);
+  margin-bottom: pxToRem(10px);
   text-align: center;
   font-weight: 600;
   font-size: pxToRem(24px);
@@ -122,34 +123,12 @@ label {
 input {
   padding: pxToRem(10px) pxToRem(12px);
   border-radius: pxToRem(8px);
-  border: 1px solid #ccc;
   font-size: pxToRem(16px);
   transition: border-color 0.25s;
 }
 
-input:focus {
-  outline: none;
-  border-color: #3b82f6;
-}
-
-.btn {
-  margin-top: pxToRem(8px);
-  padding: pxToRem(10px);
-  background: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: pxToRem(8px);
-  font-size: pxToRem(15px);
-  cursor: pointer;
-  transition: background-color 0.25s;
-}
-
-.btn:hover {
-  background: #2563eb;
-}
-
 .error {
-  color: #e11d48;
+  color: colors.$error;
   font-size: pxToRem(14px);
   margin-top: pxToRem(6px);
 }
