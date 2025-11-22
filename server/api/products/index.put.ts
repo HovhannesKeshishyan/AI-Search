@@ -26,13 +26,15 @@ export default defineEventHandler(async (event) => {
 
   if (imageIsChanged) {
     // if old image of product don't have any other usage, delete it from cloud
-    const imageHasOtherUsage = products.find((p) => {
-      return p.id !== id && p.imagePublicID === imagePublicID;
-    });
+    const needDeleteOldImage = !imageHasOtherUsage(
+      imagePublicID,
+      products[productIndex].id,
+      products
+    );
     // upload new image and delete old
     const [{ publicId, secureUrl }] = await Promise.all([
       uploadeImageToCloud(editedProduct.imageUrl),
-      imageHasOtherUsage ? null : deleteImageFromCloud(imagePublicID),
+      needDeleteOldImage ? deleteImageFromCloud(imagePublicID) : null,
     ]);
     // set image new data
     imageUrl = secureUrl;

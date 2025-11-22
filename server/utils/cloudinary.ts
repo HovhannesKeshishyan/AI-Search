@@ -41,3 +41,13 @@ export const deleteImageFromCloud = async (publicId: string): Promise<void> => {
     console.log("Error deleteing image from cloudinary: ", error);
   }
 };
+
+export const imageHasOtherUsage = (
+  publicId: string,
+  currentProductId: string,
+  products: Product[]
+): boolean => {
+  return !!products.find((p) => {
+    return p.id !== currentProductId && p.imagePublicID === publicId;
+  });
+};
