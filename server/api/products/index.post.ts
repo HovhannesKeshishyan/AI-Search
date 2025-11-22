@@ -4,6 +4,9 @@ export default defineEventHandler(async (event) => {
 
   const products = await getProductsFromDB();
 
+  const { url } = await uploadeImageToCloud(product.image);
+  product.image = url;
+
   const finalProduct = {
     ...product,
     id: crypto.randomUUID(),

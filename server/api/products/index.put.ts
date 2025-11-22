@@ -1,8 +1,18 @@
 export default defineEventHandler(async (event) => {
-  const { id, product: editedProduct } = await readBody<{
+  const {
+    id,
+    imageIsChanged,
+    product: editedProduct,
+  } = await readBody<{
     id: string;
+    imageIsChanged: boolean;
     product: ProductFormState;
   }>(event);
+
+  if (imageIsChanged) {
+    const { url } = await uploadeImageToCloud(editedProduct.image);
+    editedProduct.image = url;
+  }
 
   const products = await getProductsFromDB();
 

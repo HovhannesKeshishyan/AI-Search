@@ -13,6 +13,7 @@
   display: flex;
   min-height: 100dvh;
   flex-direction: column;
+  gap: pxToRem(20px);
 
   main {
     flex: 1;

@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { toast } from "vue3-toastify";
-import type { FormSubmitEvent } from "@primevue/forms/form";
 import type { ProductFormErrors } from "~~/shared/types/productFormErrors";
 
 const props = defineProps<{
@@ -21,12 +20,32 @@ if (props.product) {
   };
 }
 
+const imageIsChanged = ref(false);
+
+function onImageChange(event: Event) {
+  const target = event.target as HTMLInputElement;
+  if (target.files && target.files.length > 0) {
+    const file = target.files[0] as File;
+    const reader = new FileReader();
+
+    reader.onload = async (e) => {
+      const result = e.target?.result || null;
+      formState.value.image = String(result);
+      imageIsChanged.value = true;
+    };
+
+    reader.readAsDataURL(file);
+  } else {
+    formState.value.image = "";
+  }
+}
+
 const isSubmiting = ref(false);
 const formErrors = ref<ProductFormErrors>({} as ProductFormErrors);
 const formState = ref<ProductFormState>(initialState);
 
-const onFormSubmit = async (e: FormSubmitEvent<Record<string, string>>) => {
-  const values = e.values as Record<keyof ProductFormState, string>;
+const onFormSubmit = async () => {
+  const values = formState.value;
   const { isValid, errors } = validateProductForm(values);
   if (!isValid) {
     formErrors.value = errors;
@@ -38,7 +57,8 @@ const onFormSubmit = async (e: FormSubmitEvent<Record<string, string>>) => {
   try {
     const payload = {
       id: id || null,
-      product: e.values,
+      imageIsChanged: imageIsChanged.value,
+      product: values,
     };
     // edit mode
     const method = id ? "PUT" : "POST";
@@ -66,7 +86,13 @@ const onFormSubmit = async (e: FormSubmitEvent<Record<string, string>>) => {
 
     <Form :initial-values="formState" class="form" @submit="onFormSubmit">
       <div class="form-input">
-        <InputText name="title" type="text" placeholder="Title" fluid />
+        <InputText
+          v-model="formState.title"
+          name="title"
+          type="text"
+          placeholder="Title"
+          fluid
+        />
         <Message
           v-if="formErrors.title"
           severity="error"
@@ -77,6 +103,7 @@ const onFormSubmit = async (e: FormSubmitEvent<Record<string, string>>) => {
       </div>
       <div class="form-input">
         <InputText
+          v-model="formState.description"
           name="description"
           type="text"
           placeholder="Description"
@@ -92,7 +119,13 @@ const onFormSubmit = async (e: FormSubmitEvent<Record<string, string>>) => {
         >
       </div>
       <div class="form-input">
-        <InputText name="price" type="number" placeholder="Price" fluid />
+        <InputText
+          v-model="formState.price"
+          name="price"
+          type="number"
+          placeholder="Price"
+          fluid
+        />
         <Message
           v-if="formErrors.price"
           severity="error"
@@ -101,8 +134,32 @@ const onFormSubmit = async (e: FormSubmitEvent<Record<string, string>>) => {
           >{{ formErrors.price }}</Message
         >
       </div>
+      <div class="display-none">
+        <InputText
+          v-model="formState.image"
+          name="image"
+          type="text"
+          placeholder="Image"
+        />
+      </div>
       <div class="form-input">
-        <InputText name="image" type="text" placeholder="Image" fluid />
+        <label for="new-image">
+          {{ formState.image ? "Change Image" : "Select Image" }}
+        </label>
+        <InputText
+          id="new-image"
+          name="file"
+          type="file"
+          @change="onImageChange"
+        />
+
+        <NuxtImg
+          v-if="formState.image"
+          class="img-tmb"
+          :src="formState.image"
+          alt="Image tumbnail"
+        />
+
         <Message
           v-if="formErrors.image"
           severity="error"
@@ -111,6 +168,7 @@ const onFormSubmit = async (e: FormSubmitEvent<Record<string, string>>) => {
           >{{ formErrors.image }}</Message
         >
       </div>
+
       <Button
         :disabled="isSubmiting"
         :loading="isSubmiting"
@@ -134,5 +192,11 @@ const onFormSubmit = async (e: FormSubmitEvent<Record<string, string>>) => {
   display: flex;
   flex-direction: column;
   gap: pxToRem(10px);
+}
+
+.img-tmb {
+  max-width: pxToRem(200px);
+  height: auto;
+  border-radius: pxToRem(20px);
 }
 </style>
