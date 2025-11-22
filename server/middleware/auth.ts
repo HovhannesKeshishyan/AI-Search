@@ -1,5 +1,4 @@
 import type { H3Event } from "h3";
-import { cleareAuthToken } from "../utils/cleareAuthToken";
 
 const isAdminRoute = (event: H3Event) => {
   const { path, method } = event;

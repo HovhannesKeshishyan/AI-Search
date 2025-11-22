@@ -1,5 +1,4 @@
 import bcrypt from "bcrypt";
-import { setAuthToken } from "~~/server/utils/setAuthToken";
 
 function throwAuthError() {
   throw createError({
