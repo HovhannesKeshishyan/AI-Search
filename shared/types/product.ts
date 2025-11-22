@@ -3,6 +3,7 @@ export interface Product {
   title: string;
   description: string;
   price: string;
-  image: string;
+  imageUrl: string;
+  imagePublicID?: string;
   embeddings: number[] | null;
 }

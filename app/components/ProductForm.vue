@@ -17,7 +17,7 @@ if (props.product) {
     title: props.product.title,
     description: props.product.description,
     price: props.product.price,
-    image: props.product.image,
+    imageUrl: props.product.imageUrl,
   };
 }
 
@@ -30,12 +30,12 @@ onChange((files) => {
     const reader = new FileReader();
     reader.onload = async (e) => {
       const result = e.target?.result || null;
-      formState.value.image = String(result);
+      formState.value.imageUrl = String(result);
       imageIsChanged.value = true;
     };
     reader.readAsDataURL(files[0]);
   } else {
-    formState.value.image = "";
+    formState.value.imageUrl = "";
   }
 });
 
@@ -136,7 +136,7 @@ const onFormSubmit = async () => {
       </div>
       <div class="display-none">
         <InputText
-          v-model="formState.image"
+          v-model="formState.imageUrl"
           name="image"
           type="text"
           placeholder="Image"
@@ -145,23 +145,23 @@ const onFormSubmit = async () => {
       <div class="form-input">
         <Button
           type="button"
-          :label="formState.image ? 'Change Image' : 'Select Image'"
+          :label="formState.imageUrl ? 'Change Image' : 'Select Image'"
           @click="() => open()"
         />
 
         <NuxtImg
-          v-if="formState.image"
+          v-if="formState.imageUrl"
           class="img-tmb"
-          :src="formState.image"
+          :src="formState.imageUrl"
           alt="Image tumbnail"
         />
 
         <Message
-          v-if="formErrors.image"
+          v-if="formErrors.imageUrl"
           severity="error"
           size="small"
           variant="simple"
-          >{{ formErrors.image }}</Message
+          >{{ formErrors.imageUrl }}</Message
         >
       </div>
 

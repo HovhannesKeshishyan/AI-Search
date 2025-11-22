@@ -15,8 +15,8 @@ export const validateProductForm = (
   if (!formState.price?.trim()) {
     errors.price = "Price is required.";
   }
-  if (!formState.image?.trim()) {
-    errors.image = "Image is required.";
+  if (!formState.imageUrl?.trim()) {
+    errors.imageUrl = "Image is required.";
   }
 
   const isValid = !Object.keys(errors).length;

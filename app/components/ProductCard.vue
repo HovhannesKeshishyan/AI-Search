@@ -8,7 +8,7 @@ defineProps<{
   <div class="product-card">
     <div class="image-wrapper">
       <NuxtImg
-        :src="product.image"
+        :src="product.imageUrl"
         width="300"
         height="200"
         quality="80"

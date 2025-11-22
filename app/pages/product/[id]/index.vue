@@ -52,7 +52,7 @@ const deleteProduct = async () => {
   <div v-else class="product-page">
     <div class="image-wrapper">
       <NuxtImg
-        :src="product.image"
+        :src="product.imageUrl"
         width="500"
         height="500"
         quality="80"

@@ -8,15 +8,17 @@ cloudinary.config({
 
 const FOLDER_NAME = "Products";
 
-type ReturnType = Promise<{ url: string; secureUrl: string } | never>;
+type ReturnType = Promise<
+  { publicId: string; url: string; secureUrl: string } | never
+>;
 
 export const uploadeImageToCloud = async (image: string): ReturnType => {
   try {
     const data = await cloudinary.uploader.upload(image, {
       folder: FOLDER_NAME,
     });
-    console.log(data);
     return {
+      publicId: data.public_id,
       url: data.url,
       secureUrl: data.secure_url,
     };

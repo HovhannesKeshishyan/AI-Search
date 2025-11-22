@@ -24,7 +24,7 @@ export default defineEventHandler(async (event) => {
     title: product.title,
     description: product.description,
     price: product.price,
-    image: product.image,
+    imageUrl: product.imageUrl,
   };
 
   const { isValid, errors } = validateProductForm(fieldsForValidating);

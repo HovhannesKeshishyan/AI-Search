@@ -4,8 +4,8 @@ export default defineEventHandler(async (event) => {
 
   const products = await getProductsFromDB();
 
-  const { secureUrl } = await uploadeImageToCloud(product.image);
-  product.image = secureUrl;
+  const { secureUrl } = await uploadeImageToCloud(product.imageUrl);
+  product.imageUrl = secureUrl;
 
   const finalProduct = {
     ...product,
