@@ -21,8 +21,6 @@ if (props.product) {
   };
 }
 
-const imageIsChanged = ref(false);
-
 const { open, onChange } = useFileDialog();
 
 onChange((files) => {
@@ -39,17 +37,36 @@ onChange((files) => {
   }
 });
 
+const imageIsChanged = ref(false);
+const formIsTouched = ref(false);
 const isSubmiting = ref(false);
 const formErrors = ref<ProductFormErrors>({} as ProductFormErrors);
 const formState = ref<ProductFormState>(initialState);
 
-const onFormSubmit = async () => {
-  const values = formState.value;
-  const { isValid, errors } = validateProductForm(values);
+const validate = () => {
+  formIsTouched.value = true;
+  formErrors.value = {} as ProductFormErrors;
+  const { isValid, errors } = validateProductForm(formState.value);
   if (!isValid) {
     formErrors.value = errors;
-    return;
   }
+  return { isValid };
+};
+
+watch(
+  formState,
+  () => {
+    if (formIsTouched.value) {
+      validate();
+    }
+  },
+  { deep: true }
+);
+
+const onFormSubmit = async () => {
+  const values = formState.value;
+  const { isValid } = validate();
+  if (!isValid) return;
 
   isSubmiting.value = true;
 
