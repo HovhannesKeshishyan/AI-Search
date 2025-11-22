@@ -36,8 +36,8 @@ const deleteProduct = async () => {
         id,
       },
     });
+    await navigateTo("/", { replace: true });
     toast("Product deleted.");
-    router.replace("/");
   } catch (error) {
     console.log(error);
     toast.error("Failed to delete product.");

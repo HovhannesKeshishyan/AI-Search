@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { toast } from "vue3-toastify";
+import { useFileDialog } from "@vueuse/core";
 import type { ProductFormErrors } from "~~/shared/types/productFormErrors";
 
 const props = defineProps<{
@@ -22,23 +23,21 @@ if (props.product) {
 
 const imageIsChanged = ref(false);
 
-function onImageChange(event: Event) {
-  const target = event.target as HTMLInputElement;
-  if (target.files && target.files.length > 0) {
-    const file = target.files[0] as File;
-    const reader = new FileReader();
+const { open, onChange } = useFileDialog();
 
+onChange((files) => {
+  if (files?.[0]) {
+    const reader = new FileReader();
     reader.onload = async (e) => {
       const result = e.target?.result || null;
       formState.value.image = String(result);
       imageIsChanged.value = true;
     };
-
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(files[0]);
   } else {
     formState.value.image = "";
   }
-}
+});
 
 const isSubmiting = ref(false);
 const formErrors = ref<ProductFormErrors>({} as ProductFormErrors);
@@ -66,6 +65,7 @@ const onFormSubmit = async () => {
       method: method,
       body: payload,
     });
+    await navigateTo("/");
     toast("Form submited.");
   } catch (error: unknown) {
     if (isApiError(error)) {
@@ -143,14 +143,10 @@ const onFormSubmit = async () => {
         />
       </div>
       <div class="form-input">
-        <label for="new-image">
-          {{ formState.image ? "Change Image" : "Select Image" }}
-        </label>
-        <InputText
-          id="new-image"
-          name="file"
-          type="file"
-          @change="onImageChange"
+        <Button
+          type="button"
+          :label="formState.image ? 'Change Image' : 'Select Image'"
+          @click="() => open()"
         />
 
         <NuxtImg
