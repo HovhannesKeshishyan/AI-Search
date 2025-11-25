@@ -48,25 +48,31 @@ async function handleLogin() {
 
       <form class="form" @submit.prevent="handleLogin">
         <div class="field">
-          <label for="username">Username</label>
-          <input
-            id="username"
-            v-model="username"
-            type="text"
-            autocomplete="username"
-            required
-          />
+          <FloatLabel variant="on">
+            <label for="username">Username</label>
+            <InputText
+              id="username"
+              v-model="username"
+              name="username"
+              type="text"
+              fluid
+              required
+            />
+          </FloatLabel>
         </div>
 
         <div class="field">
-          <label for="password">Password</label>
-          <input
-            id="password"
-            v-model="password"
-            type="password"
-            autocomplete="current-password"
-            required
-          />
+          <FloatLabel variant="on">
+            <label for="password">Password</label>
+            <InputText
+              id="password"
+              v-model="password"
+              name="password"
+              type="password"
+              fluid
+              required
+            />
+          </FloatLabel>
         </div>
 
         <Button label="Login" severity="success" type="submit" />

@@ -21,17 +21,19 @@ async function handleLogout() {
           <span>Welcome, {{ user.name }} ({{ user.role }})</span>
 
           <div class="buttons-wrapper">
-            <NuxtLink to="/product/add">
-              <Button label="Add Product" />
-            </NuxtLink>
+            <Button v-slot="slotProps" as-child>
+              <NuxtLink to="/product/add" :class="slotProps.class"
+                >Add Product</NuxtLink
+              >
+            </Button>
 
             <Button severity="danger" label="Logout" @click="handleLogout" />
           </div>
         </div>
         <div v-else>
-          <NuxtLink to="/login">
-            <Button label="Login" />
-          </NuxtLink>
+          <Button v-slot="slotProps" as-child>
+            <NuxtLink to="/login" :class="slotProps.class">Login</NuxtLink>
+          </Button>
         </div>
       </nav>
     </header>
