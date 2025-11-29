@@ -42,6 +42,7 @@ async function handleLogout() {
 
 <style scoped lang="scss">
 @use "~/assets/css/colors.scss";
+@use "~/assets/css/breackpoints.scss";
 
 .header-container {
   position: sticky;
@@ -66,6 +67,14 @@ async function handleLogout() {
 .app-title a {
   text-decoration: none;
   color: white;
+
+  h1 {
+    font-size: pxToRem(30px);
+
+    @media screen and (max-width: breackpoints.$mobile) {
+      font-size: pxToRem(22px);
+    }
+  }
 }
 
 .admin-section {
