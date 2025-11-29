@@ -74,6 +74,8 @@ defineProps<{
 .product-description {
   font-size: pxToRem(20px);
   color: colors.$text-secondary;
+
+  @include text-clamp(3);
 }
 
 .product-price {
