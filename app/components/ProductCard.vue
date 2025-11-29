@@ -40,10 +40,8 @@ defineProps<{
   overflow: hidden;
   transition: scale 0.2s ease-in-out;
 
-  @media (hover: hover) {
-    &:hover {
-      scale: 1.02;
-    }
+  @include hover-supported {
+    scale: 1.02;
   }
 }
 

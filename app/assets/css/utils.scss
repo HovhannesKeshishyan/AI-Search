@@ -10,6 +10,14 @@
   }
 }
 
+@mixin hover-supported {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
 .container {
   width: 100%;
   max-width: 1224px;
