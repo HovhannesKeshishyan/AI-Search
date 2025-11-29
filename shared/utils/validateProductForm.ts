@@ -14,6 +14,8 @@ export const validateProductForm = (
   }
   if (!formState.price?.trim()) {
     errors.price = "Price is required.";
+  } else if (!Number.isInteger(Number(formState.price))) {
+    errors.price = "Price must be an integer.";
   }
   if (!formState.imageUrl?.trim()) {
     errors.imageUrl = "Image is required.";
