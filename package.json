@@ -5,8 +5,10 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
+    "dev:host": "nuxt dev --host 0.0.0.0",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "preview:host": "nuxt preview --host 0.0.0.0",
     "postinstall": "nuxt prepare",
     "lint": "eslint",
     "lint:fix": "eslint . --fix"

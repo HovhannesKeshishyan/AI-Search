@@ -26,6 +26,7 @@ export default defineNuxtConfig({
           content:
             "web app for searching producs, using semantic search AI features for perfect search",
         },
+        { name: "theme-color", content: "#10b8a8" },
       ],
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.svg" }],
     },
