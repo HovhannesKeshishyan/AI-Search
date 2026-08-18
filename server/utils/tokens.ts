@@ -6,7 +6,7 @@ const ONE_WEEK = 60 * 60 * 24 * 7;
 export const setAuthToken = (
   event: H3Event,
   token: string,
-  maxAge = ONE_WEEK
+  maxAge = ONE_WEEK,
 ) => {
   setCookie(event, "auth_token", token, {
     httpOnly: true,
@@ -31,10 +31,10 @@ export const verifyJwtToken = async (token: string): Promise<JwtPayload> => {
   try {
     return jwt.verify(
       token,
-      String(process.env.JWT_ACCESS_SECRET)
+      String(process.env.JWT_ACCESS_SECRET),
     ) as JwtPayload;
   } catch (error) {
     console.log(error);
-    throw new Error("Invalid token");
+    throw new Error("Invalid token", { cause: error });
   }
 };

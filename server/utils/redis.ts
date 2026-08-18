@@ -27,6 +27,6 @@ export const getAdminCredentialsFromDB =
       return adminCredentials;
     } catch (error) {
       console.log(error);
-      throw new Error("Can't get admin credentials");
+      throw new Error("Can't get admin credentials", { cause: error });
     }
   };
