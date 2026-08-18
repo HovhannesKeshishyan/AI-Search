@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
   const products = await getProductsFromDB();
 
   const product = products.find((p) => p.id === id);
-  if (product) return product;
+  if (product) return getProductDTO(product);
 
   throw createError({
     statusCode: 404,

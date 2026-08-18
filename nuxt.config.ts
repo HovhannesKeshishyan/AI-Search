@@ -32,7 +32,7 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ["~/assets/css/global.scss"],
+  css: ["~/assets/css/libs.css", "~/assets/css/global.scss"],
 
   image: {
     domains: ["https://images.unsplash.com"],
