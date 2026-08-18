@@ -1,15 +1,21 @@
 import cosineSimilarity from "compute-cosine-similarity";
 
+interface queryData {
+  search: string;
+  enableSemanticSearch: "true" | "false";
+}
+
+function getProductsListDTO(products: Product[]) {
+  return products.map((p) => getProductDTO(p));
+}
+
 export default defineEventHandler(async (event) => {
-  const { search, enableSemanticSearch } = getQuery<{
-    search: string;
-    enableSemanticSearch: "true" | "false";
-  }>(event);
+  const { search, enableSemanticSearch } = getQuery<queryData>(event);
 
   const products = await getProductsFromDB();
 
   if (!search.trim()) {
-    return { products: products };
+    return { products: getProductsListDTO(products) };
   }
 
   const isSemanticSearch = enableSemanticSearch === "true";
@@ -35,12 +41,12 @@ export default defineEventHandler(async (event) => {
       return similarity && similarity > 0.7;
     });
 
-    return { products: filteredProducts, similarities };
+    return { products: getProductsListDTO(filteredProducts), similarities };
   }
 
   const searchText = search.toLowerCase();
   const filteredProducts = products.filter((p) => {
     return p.title.toLowerCase().startsWith(searchText);
   });
-  return { products: filteredProducts };
+  return { products: getProductsListDTO(filteredProducts) };
 });
