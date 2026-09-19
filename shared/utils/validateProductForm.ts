@@ -12,9 +12,10 @@ export const validateProductForm = (
   if (!formState.description?.trim()) {
     errors.description = "Description is required.";
   }
-  if (!formState.price?.trim()) {
+  const price = String(formState.price ?? "").trim();
+  if (!price) {
     errors.price = "Price is required.";
-  } else if (!Number.isInteger(Number(formState.price))) {
+  } else if (!Number.isInteger(Number(price))) {
     errors.price = "Price must be an integer.";
   }
   if (!formState.imageUrl?.trim()) {
