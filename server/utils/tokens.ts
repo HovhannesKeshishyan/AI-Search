@@ -31,7 +31,7 @@ export const cleareAuthToken = (event: H3Event) => {
 
 export const createJwtToken = (payload: object) => {
   return jwt.sign(payload, getJwtSecret(), {
-    expiresIn: "1h",
+    expiresIn: ONE_WEEK,
   });
 };
 
