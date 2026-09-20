@@ -23,7 +23,7 @@ export const uploadeImageToCloud = async (image: string): ReturnType => {
       secureUrl: data.secure_url,
     };
   } catch (error) {
-    console.log("Error uploading to cloudinary: ", error);
+    logger.error("Cloudinary upload failed", error);
     throw createError({
       statusCode: 424,
       statusMessage: "Failed to upload image",
@@ -36,9 +36,9 @@ export const deleteImageFromCloud = async (publicId: string): Promise<void> => {
     const data = await cloudinary.uploader.destroy(publicId, {
       invalidate: true,
     });
-    console.log("Image is deleted from cloudinary: ", data);
+    logger.info("Cloudinary image deleted", { publicId, result: data });
   } catch (error) {
-    console.log("Error deleteing image from cloudinary: ", error);
+    logger.error("Cloudinary delete failed", error, { publicId });
   }
 };
 

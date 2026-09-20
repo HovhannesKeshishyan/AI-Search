@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
 
       event.context.user = userData || null;
     } catch (error) {
-      console.log(error);
+      logger.warn("Invalid auth token, clearing cookie", error);
       event.context.user = null;
       cleareAuthToken(event);
     }

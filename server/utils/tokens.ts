@@ -39,7 +39,7 @@ export const verifyJwtToken = async (token: string): Promise<JwtPayload> => {
   try {
     return jwt.verify(token, getJwtSecret()) as JwtPayload;
   } catch (error) {
-    console.log(error);
+    logger.warn("JWT verification failed", error);
     throw new Error("Invalid token", { cause: error });
   }
 };

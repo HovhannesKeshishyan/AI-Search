@@ -50,7 +50,7 @@ export default defineEventHandler(async (event) => {
     };
     return userDto;
   } catch (error) {
-    console.log(error);
+    logger.error("Login request failed", error);
     return throwAuthError();
   }
 });

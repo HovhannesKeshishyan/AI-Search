@@ -18,7 +18,7 @@ export const generateEmbedding = async (
     const values = response.embeddings[0].values;
     return values;
   } catch (error) {
-    console.error("Embedding Generation Error:", error);
+    logger.error("Embedding generation failed", error);
     return null;
   }
 };

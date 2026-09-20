@@ -6,7 +6,7 @@ export const getProductsFromDB = async (): Promise<Product[]> => {
   try {
     return (await redis.get<Product[]>("PRODUCTS")) || [];
   } catch (error) {
-    console.log(error);
+    logger.error("Failed to get products from Redis", error);
     return [];
   }
 };
@@ -15,7 +15,7 @@ export const addProductsToDB = async (products: Product[]): Promise<void> => {
   try {
     await redis.set("PRODUCTS", JSON.stringify(products));
   } catch (error) {
-    console.log(error);
+    logger.error("Failed to save products to Redis", error);
   }
 };
 
@@ -29,7 +29,7 @@ export const getLoginAttempts = async (identifier: string): Promise<number> => {
   try {
     return (await redis.get<number>(loginAttemptsKey(identifier))) || 0;
   } catch (error) {
-    console.log(error);
+    logger.error("Failed to read login attempts from Redis", error);
     return 0;
   }
 };
@@ -44,7 +44,7 @@ export const registerFailedLoginAttempt = async (
       await redis.expire(key, LOGIN_WINDOW_SECONDS);
     }
   } catch (error) {
-    console.log(error);
+    logger.error("Failed to register failed login attempt", error);
   }
 };
 
@@ -52,7 +52,7 @@ export const clearLoginAttempts = async (identifier: string): Promise<void> => {
   try {
     await redis.del(loginAttemptsKey(identifier));
   } catch (error) {
-    console.log(error);
+    logger.error("Failed to clear login attempts", error);
   }
 };
 
@@ -68,7 +68,7 @@ export const getAdminCredentialsFromDB =
         await redis.get<AdminCredentials>("PRODUCTS_ADMIN");
       return adminCredentials;
     } catch (error) {
-      console.log(error);
+      logger.error("Failed to get admin credentials from Redis", error);
       throw new Error("Can't get admin credentials", { cause: error });
     }
   };
