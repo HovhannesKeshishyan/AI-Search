@@ -9,6 +9,7 @@ export default defineEventHandler(async (event) => {
   const finalProduct: Product = {
     ...product,
     id: crypto.randomUUID(),
+    price: Number(product.price),
     imageUrl: secureUrl,
     imagePublicID: publicId,
     embeddings: await generateEmbedding(product.title.toLowerCase()),

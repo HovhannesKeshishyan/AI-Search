@@ -67,7 +67,7 @@ const deleteProduct = async () => {
       </h1>
       <p class="info-block price">
         <i>Price:</i>
-        ${{ Number(product.price).toFixed(2) }}
+        ${{ product.price.toFixed(2) }}
       </p>
       <p class="info-block description">
         <i>Description:</i>

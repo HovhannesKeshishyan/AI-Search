@@ -16,7 +16,7 @@ if (props.product) {
   initialState = {
     title: props.product.title,
     description: props.product.description,
-    price: props.product.price,
+    price: String(props.product.price),
     imageUrl: props.product.imageUrl,
   };
 }
