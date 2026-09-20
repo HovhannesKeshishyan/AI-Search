@@ -21,20 +21,35 @@ if (props.product) {
   };
 }
 
-const { open, onChange } = useFileDialog();
+const MAX_IMAGE_SIZE_BYTES = 5 * 1024 * 1024;
+
+const { open, onChange } = useFileDialog({ accept: "image/*" });
 
 onChange((files) => {
-  if (files?.[0]) {
-    const reader = new FileReader();
-    reader.onload = async (e) => {
-      const result = e.target?.result || null;
-      formState.value.imageUrl = String(result);
-      imageIsChanged.value = true;
-    };
-    reader.readAsDataURL(files[0]);
-  } else {
+  const file = files?.[0];
+
+  if (!file) {
     formState.value.imageUrl = "";
+    return;
   }
+
+  if (!file.type.startsWith("image/")) {
+    toast.error("Please select an image file.");
+    return;
+  }
+
+  if (file.size > MAX_IMAGE_SIZE_BYTES) {
+    toast.error("Image must be smaller than 5MB.");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    const result = e.target?.result || null;
+    formState.value.imageUrl = String(result);
+    imageIsChanged.value = true;
+  };
+  reader.readAsDataURL(file);
 });
 
 const imageIsChanged = ref(false);
