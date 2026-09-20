@@ -13,9 +13,11 @@ const user = useAuthUser();
 const username = ref("");
 const password = ref("");
 const errorMsg = ref<string | null>(null);
+const isLoading = ref(false);
 
 async function handleLogin() {
   errorMsg.value = null;
+  isLoading.value = true;
   try {
     const userData = await $fetch("/api/auth/login", {
       method: "POST",
@@ -37,6 +39,8 @@ async function handleLogin() {
     } else {
       errorMsg.value = "An error occurred.";
     }
+  } finally {
+    isLoading.value = false;
   }
 }
 </script>
@@ -75,7 +79,12 @@ async function handleLogin() {
           </FloatLabel>
         </div>
 
-        <Button label="Login" severity="success" type="submit" />
+        <Button
+          label="Login"
+          severity="success"
+          type="submit"
+          :loading="isLoading"
+        />
 
         <p v-if="errorMsg" class="error">{{ errorMsg }}</p>
       </form>
