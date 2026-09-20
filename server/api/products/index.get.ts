@@ -7,9 +7,6 @@ interface queryData {
   limit?: string;
 }
 
-const DEFAULT_LIMIT = 12;
-const MAX_LIMIT = 100;
-
 function getProductsListDTO(products: Product[]) {
   return products.map((p) => getProductDTO(p));
 }
@@ -29,8 +26,8 @@ export default defineEventHandler(async (event) => {
 
   const page = Math.max(1, Number(pageParam) || 1);
   const limit = Math.min(
-    MAX_LIMIT,
-    Math.max(1, Number(limitParam) || DEFAULT_LIMIT),
+    PRODUCTS_MAX_PAGE_SIZE,
+    Math.max(1, Number(limitParam) || PRODUCTS_PAGE_SIZE),
   );
 
   const products = await getProductsFromDB();

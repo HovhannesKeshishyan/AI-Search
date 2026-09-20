@@ -7,7 +7,6 @@ cloudinary.config({
 });
 
 const FOLDER_NAME = "Products";
-const MAX_IMAGE_SIZE_BYTES = 5 * 1024 * 1024;
 const DATA_URI_IMAGE_REGEX = /^data:image\/[a-zA-Z0-9.+-]+;base64,/;
 
 type ReturnType = Promise<

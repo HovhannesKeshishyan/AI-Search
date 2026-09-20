@@ -9,8 +9,6 @@ import Checkbox from "primevue/checkbox";
 const SEMANTIC_SEARCH_DESCRIPTION =
   "Semantic search is an advanced search technique that understands the context and intent behind a user's query, rather than just matching keywords.";
 
-const PAGE_SIZE = 12;
-
 const search = ref("");
 const debouncedSearch = refDebounced(search, 200);
 const enableSemanticSearch = ref(false);
@@ -22,7 +20,7 @@ watch([debouncedSearch, enableSemanticSearch], () => {
 
 const { data, status } = await useFetch(
   () =>
-    `/api/products?search=${debouncedSearch.value}&enableSemanticSearch=${enableSemanticSearch.value}&page=${page.value}&limit=${PAGE_SIZE}`,
+    `/api/products?search=${debouncedSearch.value}&enableSemanticSearch=${enableSemanticSearch.value}&page=${page.value}&limit=${PRODUCTS_PAGE_SIZE}`,
 );
 
 const isEmpty = computed(() => !data.value?.products.length);
@@ -74,10 +72,10 @@ const onPageChange = (event: { page: number }) => {
       </div>
 
       <Paginator
-        v-if="data && data.total > PAGE_SIZE"
-        :rows="PAGE_SIZE"
+        v-if="data && data.total > PRODUCTS_PAGE_SIZE"
+        :rows="PRODUCTS_PAGE_SIZE"
         :total-records="data.total"
-        :first="(page - 1) * PAGE_SIZE"
+        :first="(page - 1) * PRODUCTS_PAGE_SIZE"
         @page="onPageChange"
       />
     </section>

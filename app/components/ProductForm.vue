@@ -21,8 +21,6 @@ if (props.product) {
   };
 }
 
-const MAX_IMAGE_SIZE_BYTES = 5 * 1024 * 1024;
-
 const { open, onChange } = useFileDialog({ accept: "image/*" });
 
 onChange((files) => {
