@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+definePageMeta({
+  middleware: ["admin"],
+});
+
 useSeoMeta({
   title: "Add new product",
 });
