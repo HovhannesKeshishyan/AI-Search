@@ -4,7 +4,9 @@ export const redis = Redis.fromEnv();
 
 export const getProductsFromDB = async (): Promise<Product[]> => {
   try {
-    return (await redis.get<Product[]>("PRODUCTS")) || [];
+    const products = (await redis.get<Product[]>("PRODUCTS")) || [];
+    // normalize legacy records saved before price became numeric
+    return products.map((p) => ({ ...p, price: Number(p.price) }));
   } catch (error) {
     logger.error("Failed to get products from Redis", error);
     return [];
