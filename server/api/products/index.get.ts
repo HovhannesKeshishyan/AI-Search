@@ -10,7 +10,7 @@ function getProductsListDTO(products: Product[]) {
 }
 
 export default defineEventHandler(async (event) => {
-  const { search, enableSemanticSearch } = getQuery<queryData>(event);
+  const { search = "", enableSemanticSearch } = getQuery<queryData>(event);
 
   const products = await getProductsFromDB();
 
