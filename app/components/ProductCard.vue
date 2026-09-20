@@ -22,7 +22,7 @@ defineProps<{
 
       <h3 class="product-description">{{ product.description }}</h3>
 
-      <div class="product-price">${{ Number(product.price).toFixed(2) }}</div>
+      <div class="product-price">${{ product.price.toFixed(2) }}</div>
     </div>
   </div>
 </template>

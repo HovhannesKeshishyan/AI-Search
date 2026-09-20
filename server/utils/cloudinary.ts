@@ -7,12 +7,39 @@ cloudinary.config({
 });
 
 const FOLDER_NAME = "Products";
+const DATA_URI_IMAGE_REGEX = /^data:image\/[a-zA-Z0-9.+-]+;base64,/;
 
 type ReturnType = Promise<
   { publicId: string; url: string; secureUrl: string } | never
 >;
 
+// Defense in depth: the client already restricts file type/size, but this
+// endpoint is only ever called with an admin-submitted image, so validate
+// again here rather than trusting client-side checks alone.
+const assertValidImagePayload = (image: string) => {
+  if (!image.startsWith("data:")) return;
+
+  if (!DATA_URI_IMAGE_REGEX.test(image)) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: "Image must be a valid image file",
+    });
+  }
+
+  const base64Length = image.length - image.indexOf(",") - 1;
+  const approxBytes = (base64Length * 3) / 4;
+
+  if (approxBytes > MAX_IMAGE_SIZE_BYTES) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: "Image must be smaller than 5MB",
+    });
+  }
+};
+
 export const uploadeImageToCloud = async (image: string): ReturnType => {
+  assertValidImagePayload(image);
+
   try {
     const data = await cloudinary.uploader.upload(image, {
       folder: FOLDER_NAME,
@@ -23,7 +50,7 @@ export const uploadeImageToCloud = async (image: string): ReturnType => {
       secureUrl: data.secure_url,
     };
   } catch (error) {
-    console.log("Error uploading to cloudinary: ", error);
+    logger.error("Cloudinary upload failed", error);
     throw createError({
       statusCode: 424,
       statusMessage: "Failed to upload image",
@@ -36,9 +63,9 @@ export const deleteImageFromCloud = async (publicId: string): Promise<void> => {
     const data = await cloudinary.uploader.destroy(publicId, {
       invalidate: true,
     });
-    console.log("Image is deleted from cloudinary: ", data);
+    logger.info("Cloudinary image deleted", { publicId, result: data });
   } catch (error) {
-    console.log("Error deleteing image from cloudinary: ", error);
+    logger.error("Cloudinary delete failed", error, { publicId });
   }
 };
 

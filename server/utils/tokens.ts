@@ -3,6 +3,14 @@ import jwt, { type JwtPayload } from "jsonwebtoken";
 
 const ONE_WEEK = 60 * 60 * 24 * 7;
 
+const getJwtSecret = (): string => {
+  const secret = process.env.JWT_ACCESS_SECRET;
+  if (!secret) {
+    throw new Error("JWT_ACCESS_SECRET environment variable is not set");
+  }
+  return secret;
+};
+
 export const setAuthToken = (
   event: H3Event,
   token: string,
@@ -22,19 +30,16 @@ export const cleareAuthToken = (event: H3Event) => {
 };
 
 export const createJwtToken = (payload: object) => {
-  return jwt.sign(payload, String(process.env.JWT_ACCESS_SECRET), {
-    expiresIn: "1h",
+  return jwt.sign(payload, getJwtSecret(), {
+    expiresIn: ONE_WEEK,
   });
 };
 
 export const verifyJwtToken = async (token: string): Promise<JwtPayload> => {
   try {
-    return jwt.verify(
-      token,
-      String(process.env.JWT_ACCESS_SECRET),
-    ) as JwtPayload;
+    return jwt.verify(token, getJwtSecret()) as JwtPayload;
   } catch (error) {
-    console.log(error);
+    logger.warn("JWT verification failed", error);
     throw new Error("Invalid token", { cause: error });
   }
 };

@@ -49,6 +49,7 @@ export default defineEventHandler(async (event) => {
   const updatedProduct: Product = {
     ...editedProduct,
     id, // id comes as seperate key, to not include in validation
+    price: Number(editedProduct.price),
     imageUrl,
     imagePublicID,
     embeddings: embeddings,
