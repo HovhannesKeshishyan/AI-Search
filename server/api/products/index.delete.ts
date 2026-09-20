@@ -4,7 +4,7 @@ export default defineEventHandler(async (event) => {
 
   if (!id) {
     throw createError({
-      statusCode: 404,
+      statusCode: 400,
       statusMessage: "Id is required",
     });
   }

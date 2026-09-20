@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
 
   if (!product) {
     throw createError({
-      statusCode: 404,
+      statusCode: 400,
       statusMessage: "Invalid payload",
     });
   }
@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
 
   if (!isValid) {
     throw createError({
-      statusCode: 404,
+      statusCode: 400,
       statusMessage: "Invalid payload",
       data: errors,
     });
