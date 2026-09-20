@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ProgressSpinner from "primevue/progressspinner";
 import Message from "primevue/message";
+import Paginator from "primevue/paginator";
 import { refDebounced } from "@vueuse/core";
 import InputText from "primevue/inputtext";
 import Checkbox from "primevue/checkbox";
@@ -8,16 +9,27 @@ import Checkbox from "primevue/checkbox";
 const SEMANTIC_SEARCH_DESCRIPTION =
   "Semantic search is an advanced search technique that understands the context and intent behind a user's query, rather than just matching keywords.";
 
+const PAGE_SIZE = 12;
+
 const search = ref("");
 const debouncedSearch = refDebounced(search, 200);
 const enableSemanticSearch = ref(false);
+const page = ref(1);
+
+watch([debouncedSearch, enableSemanticSearch], () => {
+  page.value = 1;
+});
 
 const { data, status } = await useFetch(
   () =>
-    `/api/products?search=${debouncedSearch.value}&enableSemanticSearch=${enableSemanticSearch.value}`
+    `/api/products?search=${debouncedSearch.value}&enableSemanticSearch=${enableSemanticSearch.value}&page=${page.value}&limit=${PAGE_SIZE}`,
 );
 
 const isEmpty = computed(() => !data.value?.products.length);
+
+const onPageChange = (event: { page: number }) => {
+  page.value = event.page + 1;
+};
 </script>
 
 <template>
@@ -60,6 +72,14 @@ const isEmpty = computed(() => !data.value?.products.length);
         <Message v-if="isEmpty" severity="warn">Products list is empty</Message>
         <ProductsList v-else :products="data?.products || []" />
       </div>
+
+      <Paginator
+        v-if="data && data.total > PAGE_SIZE"
+        :rows="PAGE_SIZE"
+        :total-records="data.total"
+        :first="(page - 1) * PAGE_SIZE"
+        @page="onPageChange"
+      />
     </section>
   </div>
 </template>
