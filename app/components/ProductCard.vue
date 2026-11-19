@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 defineProps<{
-  product: Product;
+  product: ProductDTO;
 }>();
 </script>
 
