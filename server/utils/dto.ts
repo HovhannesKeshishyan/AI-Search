@@ -1,4 +1,4 @@
-export const getProductDTO = (product: Product) => {
+export const getProductDTO = (product: Product): ProductDTO => {
   const { id, title, description, price, imageUrl, imagePublicID } = product;
   return {
     id,
@@ -7,6 +7,6 @@ export const getProductDTO = (product: Product) => {
     price,
     imageUrl,
     imagePublicID,
-    hasEmbedings: !!product.embeddings?.length,
+    hasEmbeddings: !!product.embeddings?.length,
   };
 };

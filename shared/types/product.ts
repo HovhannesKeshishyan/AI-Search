@@ -7,3 +7,7 @@ export interface Product {
   imagePublicID: string;
   embeddings: number[] | null;
 }
+
+export type ProductDTO = Omit<Product, "embeddings"> & {
+  hasEmbeddings: boolean;
+};

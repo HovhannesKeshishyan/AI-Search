@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-defineProps<{ products: Product[] }>();
+defineProps<{ products: ProductDTO[] }>();
 </script>
 
 <template>
@@ -9,7 +9,7 @@ defineProps<{ products: Product[] }>();
       :key="product.id"
       :to="`/product/${product.id}`"
       class="product-item"
-      :data-has-embeddings="!!product.embeddings?.length"
+      :data-has-embeddings="product.hasEmbeddings"
     >
       <ProductCard :product="product" />
     </NuxtLink>
